@@ -22,7 +22,7 @@ void doSomething(){
 
 int main(int argc, char **argv)
 {
-
+	
 
 	std::cout << ComponentTypeManager::getTypeFor<ComponentB>().getID() << "\n";
 	std::cout << ComponentTypeManager::getId<ComponentA>() << "\n";

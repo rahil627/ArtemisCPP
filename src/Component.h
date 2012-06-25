@@ -46,11 +46,10 @@ namespace artemis {
 		};
 ////========================================================
 //Surpress unused variable warnning. Might need to rewrite it
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored  "-Wunused-variable"
+//#pragma GCC diagnostic push
+//#pragma GCC diagnostic ignored  "-Wunused-variable"
 		/**
 		 * Manages the id and bitset for every component based on their type.
-		 * Currently any object can be passed. Keep types relevant. Make sure they are Components.
 		 * */
 
 		class ComponentTypeManager {
@@ -82,7 +81,10 @@ namespace artemis {
 				static ComponentType & getTypeFor() {
 
 					//Check if we are being legal with components and shizzle
-					Component * c = (component*)0;
+					//Component * c = (component*)0;
+					
+					assert((std::is_base_of< Component, component >::value == true));
+					
 					return getFor(typeid(component));
 				}
 
@@ -93,8 +95,10 @@ namespace artemis {
 				static bitset<BITSIZE> getBit() {
 
 					//Check if we are being legal with components and shizzle
-					Component * c = (component*)0;
+					//Component * c = (component*)0;
 
+					assert((std::is_base_of< Component, component >::value == true));
+					
 					ComponentType & type = getFor(typeid(component));
 					return type.getBit();
 				}
@@ -105,7 +109,9 @@ namespace artemis {
 				static int getId() {
 
 					//Check if we are being legal with components and shizzle
-					Component * c = (component*)0;
+					
+					assert((std::is_base_of< Component, component >::value == true));
+					
 
 					ComponentType & type = getFor(typeid(component));
 					return type.getID();
@@ -116,7 +122,7 @@ namespace artemis {
 				//typedef getCompBit bitset<BITSIZE>(*getBit<Component>)();
 
 		};
-#pragma GCC diagnostic pop
+//#pragma GCC diagnostic pop
 
 	};
 };
