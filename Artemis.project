@@ -9,9 +9,9 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="Component.h"/>
-    <File Name="BitSize.h"/>
-    <File Name="Component.cpp"/>
+    <File Name="src/BitSize.h"/>
+    <File Name="src/Component.cpp"/>
+    <File Name="src/Component.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -26,6 +26,7 @@
     <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-g;-O0;-Wall;-std=c++0x" C_Options="-g;-O0;-Wall;" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
+        <IncludePath Value="src"/>
       </Compiler>
       <Linker Options="-static-libstdc++;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>

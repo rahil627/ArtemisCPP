@@ -41,7 +41,7 @@ MakeDirCommand         :=makedir
 CmpOptions             := -g -O0 -Wall -std=c++0x $(Preprocessors)
 C_CmpOptions           := -g -O0 -Wall  $(Preprocessors)
 LinkOptions            :=  -static-libstdc++ 
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)src 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
@@ -52,7 +52,7 @@ LibPath                := $(LibraryPathSwitch).
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
-Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/Component$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -83,13 +83,13 @@ $(IntermediateDirectory)/main$(DependSuffix): main.cpp
 $(IntermediateDirectory)/main$(PreprocessSuffix): main.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/main.cpp"
 
-$(IntermediateDirectory)/Component$(ObjectSuffix): Component.cpp $(IntermediateDirectory)/Component$(DependSuffix)
-	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/Component.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/Component$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/Component$(DependSuffix): Component.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/Component$(ObjectSuffix) -MF$(IntermediateDirectory)/Component$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/Component.cpp"
+$(IntermediateDirectory)/src_Component$(ObjectSuffix): src/Component.cpp $(IntermediateDirectory)/src_Component$(DependSuffix)
+	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/Component.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_Component$(DependSuffix): src/Component.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_Component$(ObjectSuffix) -MF$(IntermediateDirectory)/src_Component$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/Component.cpp"
 
-$(IntermediateDirectory)/Component$(PreprocessSuffix): Component.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/Component$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/Component.cpp"
+$(IntermediateDirectory)/src_Component$(PreprocessSuffix): src/Component.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_Component$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/Component.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
@@ -100,9 +100,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
-	$(RM) $(IntermediateDirectory)/Component$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/Component$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/Component$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_Component$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_Component$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_Component$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-debug\Artemis"
