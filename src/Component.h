@@ -61,16 +61,7 @@ namespace artemis {
 				/**
 				 *
 				 **/
-				static ComponentType & getFor(const type_info &t) {
-					ComponentType * type = componentTypes[t.hash_code()];
-
-					if(type == NULL) {
-						type = new ComponentType();
-						componentTypes[t.hash_code()] = type;
-					}
-
-					return *type;
-				};
+				static ComponentType & getFor(const type_info &t);
 
 			public:
 
@@ -82,9 +73,9 @@ namespace artemis {
 
 					//Check if we are being legal with components and shizzle
 					//Component * c = (component*)0;
-					
+
 					assert((std::is_base_of< Component, component >::value == true));
-					
+
 					return getFor(typeid(component));
 				}
 
@@ -98,7 +89,7 @@ namespace artemis {
 					//Component * c = (component*)0;
 
 					assert((std::is_base_of< Component, component >::value == true));
-					
+
 					ComponentType & type = getFor(typeid(component));
 					return type.getBit();
 				}
@@ -109,9 +100,8 @@ namespace artemis {
 				static int getId() {
 
 					//Check if we are being legal with components and shizzle
-					
+
 					assert((std::is_base_of< Component, component >::value == true));
-					
 
 					ComponentType & type = getFor(typeid(component));
 					return type.getID();

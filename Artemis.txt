@@ -1,1 +1,1 @@
-./Debug/main.o ./Debug/src_Component.o  
+./Debug/main.o ./Debug/src_Component.o ./Debug/src_EntitySystem.o  

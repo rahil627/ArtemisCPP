@@ -27,5 +27,19 @@ namespace artemis {
 		bitset<BITSIZE> ComponentType::nextBit(1);
 		int ComponentType::nextId = 1;
 		unordered_map<size_t,ComponentType*>ComponentTypeManager::componentTypes;
+
+		//===================================================
+
+		ComponentType & ComponentTypeManager::getFor(const type_info &t) {
+			ComponentType * type = componentTypes[t.hash_code()];
+
+			if(type == NULL) {
+				type = new ComponentType();
+				componentTypes[t.hash_code()] = type;
+			}
+
+			return *type;
+		};
+
 	};
 };

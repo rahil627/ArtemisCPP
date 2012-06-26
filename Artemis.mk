@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=25-6-2012
+Date                   :=26-6-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -31,14 +31,14 @@ SourceSwitch           :=-c
 CompilerName           :=g++
 C_CompilerName         :=gcc
 OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
-Preprocessors          :=
+Preprocessors          :=$(PreprocessorSwitch)_ARTEMIS_DEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :="C:\Users\Sidar\Documents\Sidar\C++\ST\Artemis\Artemis.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
-CmpOptions             := -g -O0 -Wall -std=c++0x $(Preprocessors)
+CmpOptions             := -g -O0 -Wall -std=c++0x  $(Preprocessors)
 C_CmpOptions           := -g -O0 -Wall  $(Preprocessors)
 LinkOptions            :=  -static-libstdc++ 
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)src 
@@ -52,7 +52,7 @@ LibPath                := $(LibraryPathSwitch).
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
-Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -91,6 +91,14 @@ $(IntermediateDirectory)/src_Component$(DependSuffix): src/Component.cpp
 $(IntermediateDirectory)/src_Component$(PreprocessSuffix): src/Component.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_Component$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/Component.cpp"
 
+$(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix): src/EntitySystem.cpp $(IntermediateDirectory)/src_EntitySystem$(DependSuffix)
+	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/EntitySystem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_EntitySystem$(DependSuffix): src/EntitySystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) -MF$(IntermediateDirectory)/src_EntitySystem$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/EntitySystem.cpp"
+
+$(IntermediateDirectory)/src_EntitySystem$(PreprocessSuffix): src/EntitySystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_EntitySystem$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/EntitySystem.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -103,6 +111,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_Component$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_Component$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_Component$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_EntitySystem$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_EntitySystem$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-debug\Artemis"

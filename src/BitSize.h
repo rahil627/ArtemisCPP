@@ -2,6 +2,6 @@
 #define _BITSIZE_H
 
 //The amount of components and systems that can be created
-#define BITSIZE 256
+#define BITSIZE 32
 
 #endif 
