@@ -92,7 +92,6 @@ namespace artemis {
 		class SystemBitManager {
 			private:
 				static int POS;
-				static bitset<BITSIZE> dummy_set; // Keeps exact bit size shift
 				static unordered_map< size_t, bitset<BITSIZE>* > systemBits;
 
 			public:
@@ -107,8 +106,9 @@ namespace artemis {
 
 					if(bit == NULL) {
 
-						bit = new bitset<BITSIZE>(0);
-						(*bit)  = dummy_set << POS++;
+						bit = new bitset<BITSIZE>(1);
+						(*bit)  <<=  POS++;
+
 						systemBits[hash] = bit;
 					}
 
