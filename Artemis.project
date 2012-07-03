@@ -25,6 +25,11 @@
     <File Name="src/SystemManager.h"/>
     <File Name="src/EntityManager.cpp"/>
     <File Name="src/EntityManager.h"/>
+    <VirtualDirectory Name="test">
+      <File Name="src/MovementSystem.h"/>
+      <File Name="src/MovementComponent.h"/>
+    </VirtualDirectory>
+    <File Name="src/ComponentMapper.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

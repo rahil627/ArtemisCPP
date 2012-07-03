@@ -76,7 +76,7 @@ namespace artemis {
 		}
 
 		void EntityProcessingSystem::processEntities(ImmutableBag<Entity*>* bag) {
-			for(int i=0; i < bag->getCount(); i++) {work(*bag->get(i));}
+			for(int i=0; i < bag->getCount(); i++) {work(bag->get(i));}
 		}
 		
 		void  EntitySystem::setSystemBit(bitset<BITSIZE> bit) {

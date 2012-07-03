@@ -18,8 +18,8 @@ namespace artemis {
 				EntityManager * getEntityManager();
 				//TagManager *   getTagManager();
 				//GroupManager * getGroupManager();
-				int getDelta();
-				void setDetla(int delta);
+				float getDelta();
+				void setDelta(float delta);
 				void deleteEntity(Entity *e);
 				void refreshEntity(Entity *e);
 				//Entity* createEntity();
@@ -33,7 +33,7 @@ namespace artemis {
 				EntityManager * entityManager;
 				//TagManager * tagManager;
 				//GroupManager * grouManager;
-				int delta;
+				float delta;
 				artemis::util::Bag<Entity*> refreshed;
 				artemis::util::Bag<Entity*> deleted;
 

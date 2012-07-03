@@ -5,7 +5,7 @@
 
 namespace artemis {
 	namespace util {
-		
+
 		template<typename E>
 		class ImmutableBag {
 			public:
@@ -20,7 +20,7 @@ namespace artemis {
 
 
 			public:
-				Bag(){
+				Bag() {
 					init(64);
 				};
 
@@ -28,7 +28,7 @@ namespace artemis {
 				Bag(int capacity) {
 					init(capacity);
 				};
-	
+
 				void add(E o) {
 					if(size == count)grow();
 
@@ -65,8 +65,8 @@ namespace artemis {
 				};
 
 				virtual int getCapacity() {return size;};
-				virtual bool isEmpty(){return count == 0;};
-				virtual int getCount(){return count;};
+				virtual bool isEmpty() {return count == 0;};
+				virtual int getCount() {return count;};
 
 				bool remove(E o) {
 
@@ -82,6 +82,7 @@ namespace artemis {
 
 				E remove(int index) {
 					if(count == 0) return nullptr;
+
 					E object = data[index];
 					data[index] = data[count-1];
 					data[count-1] = nullptr;
@@ -112,7 +113,7 @@ namespace artemis {
 						data[count-1] = nullptr;
 						return (E) object;
 					}
-			
+
 					return nullptr;
 				};
 
@@ -157,18 +158,13 @@ namespace artemis {
 						data[i] = currentData[i];
 					}
 				};
-				
-				void init(int capacity)
-				{
+
+				void init(int capacity) {
 					size = capacity;
 					count = 0;
 					data = new E[capacity];
+					clear();
 				}
-					
-				
-
-			protected:
-
 
 		};
 	};

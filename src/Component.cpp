@@ -2,6 +2,7 @@
 #include "World.h"
 
 using namespace std;
+using namespace artemis::system;
 
 namespace artemis {
 	namespace component {
@@ -43,6 +44,6 @@ namespace artemis {
 
 			return *type;
 		};
-
+		
 	};
 };

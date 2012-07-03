@@ -38,10 +38,11 @@ namespace artemis {
 				
 				void setWorld(World *world);
 				void change(Entity &e);
-		
+				void process();
+				
 			protected:
 				EntitySystem() { this->world = nullptr; };
-
+				artemis::system::World * world;
 				/**
 				* Call this in the constructor of the derived system
 				*/
@@ -61,13 +62,10 @@ namespace artemis {
 				virtual void processEntities(artemis::util::ImmutableBag<Entity*> * bag) = 0;
 				virtual bool checkProcessing() = 0;
 
-				void process();
-
 
 			private:
 				std::bitset<BITSIZE> systemBit;
 				std::bitset<BITSIZE> typeFlags;
-				artemis::system::World * world;
 				artemis::util::Bag<Entity*> actives;
 
 				void remove(Entity &e);
@@ -105,7 +103,7 @@ namespace artemis {
 			public:
 				EntityProcessingSystem() {};
 			protected:
-				virtual void work(Entity &e) = 0;
+				virtual void work(Entity *e) = 0;
 				void processEntities(artemis::util::ImmutableBag<Entity*> * bag);
 				virtual bool checkProcessing();
 		};

@@ -8,11 +8,11 @@
 #include "BitSize.h"
 #include "Component.h"
 #include "ImmutableBag.h"
-
+//#include "EntityManager.h"
 
 namespace artemis {
 	namespace system {
-		
+
 		class EntityManager;
 		class World;
 		
@@ -55,7 +55,7 @@ namespace artemis {
 				}*/
 
 				void removeComponent(artemis::component::ComponentType & type);
-				bool isActive();
+
 
 				artemis::component::Component * getComponent(artemis::component::ComponentType & type);
 
@@ -65,6 +65,8 @@ namespace artemis {
 				}*/
 
 				artemis::util::ImmutableBag<artemis::component::Component*> * getComponents();
+				
+				bool isActive();
 				void refresh();
 				void remove();
 				void setGroup(std::string group);

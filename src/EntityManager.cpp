@@ -12,6 +12,13 @@ namespace artemis {
 	namespace system {
 		EntityManager::EntityManager(World* world) : componentsByType(64) {
 			this->world = world;
+			
+				nextAvailableId = 0;
+				count = 0;
+				uniqueEntityId = 0;
+				totalCreated = 0;
+				totalRemoved = 0;
+			
 		};
 
 		void EntityManager::addComponent(Entity * e, Component * c) {

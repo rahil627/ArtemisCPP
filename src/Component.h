@@ -18,7 +18,7 @@ namespace artemis {
 			public:
 				virtual ~Component() = 0;
 			protected:
-				Component(){};
+				Component() {};
 		};
 
 ////========================================================
@@ -45,9 +45,6 @@ namespace artemis {
 		};
 
 ////========================================================
-//Surpress unused variable warnning. Might need to rewrite it
-//#pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored  "-Wunused-variable"
 		/**
 		 * Manages the id and bitset for every component based on their type.
 		 * */
@@ -58,16 +55,16 @@ namespace artemis {
 				ComponentTypeManager();
 				static std::unordered_map<size_t,ComponentType*> componentTypes;
 
-	
 
-		public:
+
+			public:
 
 
 				/**
 				 *
 				 **/
 				static ComponentType & getTypeFor(const std::type_info &t);
-				
+
 				/**
 				* Gets the component type object
 				**/
@@ -115,36 +112,8 @@ namespace artemis {
 				//typedef getCompBit bitset<BITSIZE>(*getBit<Component>)();
 
 		};
-//#pragma GCC diagnostic pop
 
 ////========================================================
-
-		
-
-		/*template<typename T>
-		class ComponentMapper {
-
-			private:
-				//ComponentType * type;
-				artemis::system::EntityManager * em;
-
-			public:
-
-				ComponentMapper(artemis::system::World &world) {
-					em = world.getEntityManager();
-					//type = ComponentTypeManager::getTypeFor<T>();
-				}
-
-				~ComponentType() {
-					type = nullptr;
-					em = nullptr;
-				}
-
-				T & get(artemis::system::Entity * e) {
-					return &(T)em->getComponent<T>(e);
-				}
-
-		};*/
 
 	};
 };

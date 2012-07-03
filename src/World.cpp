@@ -14,7 +14,7 @@ namespace artemis {
 				deleted.add(e);
 		}
 
-		int World::getDelta() {
+		float World::getDelta() {
 			return this->delta;
 		}
 
@@ -54,7 +54,7 @@ namespace artemis {
 			refreshed.add(e);
 		}
 
-		void World::setDetla(int delta) {
+		void World::setDelta(float delta) {
 			this->delta = delta;
 		}
 
