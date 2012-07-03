@@ -1,1 +1,1 @@
-./Debug/main.o ./Debug/src_Component.o ./Debug/src_EntitySystem.o  
+./Debug/src_Component.o ./Debug/src_EntitySystem.o ./Debug/main.o ./Debug/src_Entity.o ./Debug/src_World.o ./Debug/src_SystemManager.o ./Debug/src_EntityManager.o  

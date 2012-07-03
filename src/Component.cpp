@@ -1,4 +1,7 @@
 #include "Component.h"
+#include "World.h"
+
+using namespace std;
 
 namespace artemis {
 	namespace component {
@@ -20,7 +23,7 @@ namespace artemis {
 			return bit;
 		}
 
-		int ComponentType::getID() const {
+		int ComponentType::getId() const {
 			return id;
 		}
 
@@ -30,10 +33,10 @@ namespace artemis {
 
 		//===================================================
 
-		ComponentType & ComponentTypeManager::getFor(const type_info &t) {
+		ComponentType & ComponentTypeManager::getTypeFor(const type_info &t) {
 			ComponentType * type = componentTypes[t.hash_code()];
 
-			if(type == NULL) {
+			if(type == nullptr) {
 				type = new ComponentType();
 				componentTypes[t.hash_code()] = type;
 			}

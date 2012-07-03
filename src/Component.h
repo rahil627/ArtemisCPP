@@ -3,14 +3,12 @@
 
 #include <bitset>
 #include "BitSize.h"
+
 #include <unordered_map>
 #include <typeinfo>
 #include <string>
 #include <iostream>
 #include <assert.h>
-
-using namespace std;
-
 
 namespace artemis {
 	namespace component {
@@ -19,8 +17,9 @@ namespace artemis {
 		class Component {
 			public:
 				virtual ~Component() = 0;
+			protected:
+				Component(){};
 		};
-
 
 ////========================================================
 		/**
@@ -32,18 +31,19 @@ namespace artemis {
 			public:
 				ComponentType();
 				//==================================
-				bitset<BITSIZE> getBit() const;
-				int getID() const;
+				std::bitset<BITSIZE> getBit() const;
+				int getId() const;
 			private:
 				//
-				static bitset<BITSIZE> nextBit;
+				static std::bitset<BITSIZE> nextBit;
 				static int nextId;
 				//==================================
-				bitset<BITSIZE> bit;
+				std::bitset<BITSIZE> bit;
 				int id;
 				void init();
 
 		};
+
 ////========================================================
 //Surpress unused variable warnning. Might need to rewrite it
 //#pragma GCC diagnostic push
@@ -56,55 +56,58 @@ namespace artemis {
 
 			private:
 				ComponentTypeManager();
-				static unordered_map<size_t,ComponentType*> componentTypes;
+				static std::unordered_map<size_t,ComponentType*> componentTypes;
+
+	
+
+		public:
+
 
 				/**
 				 *
 				 **/
-				static ComponentType & getFor(const type_info &t);
-
-			public:
-
+				static ComponentType & getTypeFor(const std::type_info &t);
+				
 				/**
 				* Gets the component type object
 				**/
-				template<typename component>
+				template<typename c>
 				static ComponentType & getTypeFor() {
 
 					//Check if we are being legal with components and shizzle
 					//Component * c = (component*)0;
 
-					assert((std::is_base_of< Component, component >::value == true));
+					assert((std::is_base_of< Component, c >::value == true));
 
-					return getFor(typeid(component));
+					return getTypeFor(typeid(c));
 				}
 
 				/**
 				* Gets the bit set of a component
 				**/
-				template<typename component>
-				static bitset<BITSIZE> getBit() {
+				template<typename c>
+				static std::bitset<BITSIZE> getBit() {
 
 					//Check if we are being legal with components and shizzle
 					//Component * c = (component*)0;
 
-					assert((std::is_base_of< Component, component >::value == true));
+					assert((std::is_base_of< Component, c >::value == true));
 
-					ComponentType & type = getFor(typeid(component));
+					ComponentType & type = getTypeFor(typeid(c));
 					return type.getBit();
 				}
 				/**
 				 * Gets the component id
 				 **/
-				template<typename component>
+				template<typename c>
 				static int getId() {
 
 					//Check if we are being legal with components and shizzle
 
-					assert((std::is_base_of< Component, component >::value == true));
+					assert((std::is_base_of< Component, c >::value == true));
 
-					ComponentType & type = getFor(typeid(component));
-					return type.getID();
+					ComponentType & type = getTypeFor(typeid(c));
+					return type.getId();
 				};
 
 
@@ -113,6 +116,35 @@ namespace artemis {
 
 		};
 //#pragma GCC diagnostic pop
+
+////========================================================
+
+		
+
+		/*template<typename T>
+		class ComponentMapper {
+
+			private:
+				//ComponentType * type;
+				artemis::system::EntityManager * em;
+
+			public:
+
+				ComponentMapper(artemis::system::World &world) {
+					em = world.getEntityManager();
+					//type = ComponentTypeManager::getTypeFor<T>();
+				}
+
+				~ComponentType() {
+					type = nullptr;
+					em = nullptr;
+				}
+
+				T & get(artemis::system::Entity * e) {
+					return &(T)em->getComponent<T>(e);
+				}
+
+		};*/
 
 	};
 };

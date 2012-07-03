@@ -5,14 +5,13 @@
 
 namespace artemis {
 	namespace util {
-		class Entity;
-
+		
 		template<typename E>
 		class ImmutableBag {
 			public:
 				virtual E get(int index) = 0;
-				virtual int length() = 0;
-				virtual int getObjCount() = 0;
+				virtual int getCapacity() = 0;
+				virtual int getCount() = 0;
 				virtual bool isEmpty() = 0;
 		};
 
@@ -45,7 +44,7 @@ namespace artemis {
 
 				void clear() {
 					for(int i=0; i<size; i++) {
-						data[i] = NULL;
+						data[i] = nullptr;
 					}
 
 					count = 0;
@@ -65,13 +64,9 @@ namespace artemis {
 					return (E)data[index];
 				};
 
-				int getCapacity() {
-					return size;
-				};
-
+				virtual int getCapacity() {return size;};
 				virtual bool isEmpty(){return count == 0;};
-				virtual int length(){return size;};
-				virtual int getObjCount(){return count;};
+				virtual int getCount(){return count;};
 
 				bool remove(E o) {
 
@@ -86,9 +81,10 @@ namespace artemis {
 				};
 
 				E remove(int index) {
+					if(count == 0) return nullptr;
 					E object = data[index];
 					data[index] = data[count-1];
-					data[count-1] = NULL;
+					data[count-1] = nullptr;
 					count--;
 					return (E) object;
 				};
@@ -113,16 +109,16 @@ namespace artemis {
 				E removeLast() {
 					if(!isEmpty()) {
 						E object = data[count-1];
-						data[count-1] = NULL;
+						data[count-1] = nullptr;
 						return (E) object;
 					}
-
-					return NULL;
+			
+					return nullptr;
 				};
 
 
 				bool set(int index, E o) {
-					if(index > size) return false;
+					if(index > size) grow(index*2);;
 
 					data[index] = o;
 					return true;

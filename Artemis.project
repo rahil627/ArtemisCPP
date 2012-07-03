@@ -8,15 +8,23 @@
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-    <File Name="src/BitSize.h"/>
-    <File Name="src/Component.cpp"/>
-    <File Name="src/Component.h"/>
-    <File Name="src/EntitySystem.h"/>
-    <File Name="src/EntitySystem.cpp"/>
     <VirtualDirectory Name="util">
       <File Name="src/ImmutableBag.h"/>
     </VirtualDirectory>
+    <File Name="src/BitSize.h"/>
+    <File Name="src/Component.cpp"/>
+    <File Name="src/Component.h"/>
+    <File Name="src/EntitySystem.cpp"/>
+    <File Name="src/EntitySystem.h"/>
+    <File Name="main.cpp"/>
+    <File Name="src/Entity.cpp"/>
+    <File Name="src/Entity.h"/>
+    <File Name="src/World.cpp"/>
+    <File Name="src/World.h"/>
+    <File Name="src/SystemManager.cpp"/>
+    <File Name="src/SystemManager.h"/>
+    <File Name="src/EntityManager.cpp"/>
+    <File Name="src/EntityManager.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

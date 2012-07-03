@@ -1,5 +1,5 @@
-#ifndef _ENTITY_SYSTEM_H_
-#define _ENTITY_SYSTEM_H_
+#ifndef ENTITY_SYSTEM_H
+#define ENTITY_SYSTEM_H
 
 #include <bitset>
 #include "BitSize.h"
@@ -8,57 +8,69 @@
 #include <assert.h>
 #include <typeinfo>
 #include <bitset>
+#include "ImmutableBag.h"
+//#include "Entity.h"
+
 
 namespace artemis {
 	namespace system {
 
+		class Entity;
+		class World;
+		
 		class EntitySystem {
 
 			public:
-
-				EntitySystem() {
-
-				}
 
 				void printTypeFlag() {
 					std::cout << typeFlags;
 				}
 
+				std::bitset<BITSIZE> getSystemBit() {
+					return systemBit;
+				}
+
+				void setSystemBit(std::bitset<BITSIZE> bit);
+				~EntitySystem();
+
+				/*override these functions*/
+				virtual void initialize() {};
+				
+				void setWorld(World *world);
+				void change(Entity &e);
+		
+			protected:
+				EntitySystem() { this->world = nullptr; };
 
 				/**
-				 * Call this in the constructor of the derived system
-				 */
-				//TODO move to protected after testing
+				* Call this in the constructor of the derived system
+				*/
 				template<typename...components>
 				void setComponentTypes() {
 					addToTypeFlag(typelist<components...>());
 				}
 
-			protected:
-
-
 				/*override these functions*/
-				virtual void initialize() {};
 				virtual void begin() {};
 				virtual void end() {};
+				virtual void removed(artemis::system::Entity &e) {};
+				virtual void added(artemis::system::Entity &e) {};
 
-				//TODO Can't add these methods until further development
-				//virtual void removed(Entity &e)
-				//virtual void added(Entity &e){};
-				//virtual void processEntities() = 0;
-				//virtual bool checkProcessing() = 0;
-				//void change(Entity &e){};
-				//setWorld(World &world){};
 
-				void setSystemBit(bitset<BITSIZE> bit) {
-					systemBit = bit;
-				}
+				//Abstracts
+				virtual void processEntities(artemis::util::ImmutableBag<Entity*> * bag) = 0;
+				virtual bool checkProcessing() = 0;
+
+				void process();
+
+
 			private:
-				bitset<BITSIZE> systemBit;
-				bitset<BITSIZE> typeFlags;
+				std::bitset<BITSIZE> systemBit;
+				std::bitset<BITSIZE> typeFlags;
+				artemis::system::World * world;
+				artemis::util::Bag<Entity*> actives;
 
-				//TODO Can't add these private methods untill further development
-				//remove(Entity e){};
+				void remove(Entity &e);
 
 
 				//============================================================
@@ -89,31 +101,36 @@ namespace artemis {
 				void addToTypeFlag(typelist<>) { };
 		};
 
+		class EntityProcessingSystem : public EntitySystem {
+			public:
+				EntityProcessingSystem() {};
+			protected:
+				virtual void work(Entity &e) = 0;
+				void processEntities(artemis::util::ImmutableBag<Entity*> * bag);
+				virtual bool checkProcessing();
+		};
+
+
 		class SystemBitManager {
 			private:
 				static int POS;
-				static unordered_map< size_t, bitset<BITSIZE>* > systemBits;
+				static std::unordered_map< size_t, std::bitset<BITSIZE>* > systemBits;
 
 			public:
+
+				static std::bitset<BITSIZE> & getBitFor(const std::type_info & type);
+
 				template<typename system>
-				static bitset<BITSIZE> & getBitFor() {
+				static std::bitset<BITSIZE> & getBitFor() {
 
 					assert((std::is_base_of< EntitySystem, system >::value == true));
 
-					size_t hash = typeid(system).hash_code();
+					return getBitFor(typeid(system));
 
-					bitset<BITSIZE> * bit = systemBits[hash];
-
-					if(bit == NULL) {
-
-						bit = new bitset<BITSIZE>(1);
-						(*bit)  <<=  POS++;
-
-						systemBits[hash] = bit;
-					}
-
-					return *bit;
 				}
+
+
+
 		};
 
 
