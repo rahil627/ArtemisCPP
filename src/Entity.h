@@ -24,7 +24,7 @@ namespace artemis {
 				std::bitset<BITSIZE> typeBits;
 				std::bitset<BITSIZE> systemBits;
 				artemis::system::World * world;
-				//EntityManager * entityManager;
+				EntityManager * entityManager;
 			protected:
 
 			public:
@@ -51,7 +51,7 @@ namespace artemis {
 				//Might change to non template
 				/*template<typename c>
 				void removeComponent() {
-					entityManager->removeComponent(this,ComponentTypeManager::getTypeFor<c>());
+					entityManager->removeComponent(this,artemis::component::ComponentTypeManager::getTypeFor<c>());
 				}*/
 
 				void removeComponent(artemis::component::ComponentType & type);
@@ -59,9 +59,9 @@ namespace artemis {
 
 				artemis::component::Component * getComponent(artemis::component::ComponentType & type);
 
-				template<typename c>
-				/*artemis::component::Component * getComponent() {
-					return (c)entityManager->getComponent(ComponentTypeManager.getTypeFor<c>());
+				/*template<typename c>
+				artemis::component::Component * getComponent() {
+					return (c)entityManager->getComponent(artemis::component::ComponentTypeManager.getTypeFor<c>());
 				}*/
 
 				artemis::util::ImmutableBag<artemis::component::Component*> * getComponents();

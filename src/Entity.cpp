@@ -13,13 +13,13 @@ namespace artemis {
 //FIXME Inclusion circulation 
 		Entity::Entity(World * world, int id) {
 			this->world = world;
-//			this->entityManager = world->getEntityManager();
+			this->entityManager = world->getEntityManager();
 			this->id = id;
 		}
 
 		Entity::~Entity() {
 			world = nullptr;
-			//etityManager = nullptr;
+			entityManager = nullptr;
 		}
 
 
@@ -31,13 +31,13 @@ namespace artemis {
 			typeBits |= bit;
 		}
 
-/*		Component* Entity::getComponent(ComponentType type) {
+		Component* Entity::getComponent(ComponentType & type) {
 			return entityManager->getComponent(this, type);
 		}
-*/
-		/*ImmutableBag<Component*> * Entity::getComponents() {
+
+		ImmutableBag<Component*> * Entity::getComponents() {
 			return entityManager->getComponents(this);
-		}*/
+		}
 
 		int Entity::getId() {
 			return id;
@@ -55,21 +55,21 @@ namespace artemis {
 			return uniqueId;
 		}
 
-		/*bool Entity::isActive() {
-			return entityManager->isActive(this);
-		}*/
+		bool Entity::isActive() {
+			return entityManager->isActive(this->getId());
+		}
 
 		void Entity::refresh() {
 			world->refreshEntity(this);
 		}
 
-		/*void Entity::addComponent(Component * c){
+		void Entity::addComponent(Component * c){
 			entityManager->addComponent(this,c);
 		}
 		
 		void Entity::removeComponent(ComponentType & type) {
-			entityManager.removeComponent(this, type);
-		}*/
+			entityManager->removeComponent(this, type);
+		}
 
 		void Entity::removeSystemBit(bitset<BITSIZE> bit) {
 			systemBits &= ~bit;

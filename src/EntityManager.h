@@ -19,7 +19,7 @@ namespace artemis {
 				Entity * create();
 				void remove(Entity * e);
 				void removeComponentsOfEntity(Entity * e);
-				bool isActive(int entityID);
+				bool isActive(int entityId);
 				void addComponent(Entity *e, artemis::component::Component * c);
 				void refresh(Entity* e);
 
@@ -30,13 +30,12 @@ namespace artemis {
 					removeComponent(e,artemis::component::ComponentTypeManager::getTypeFor<c>());
 				}
 
+				artemis::component::Component * getComponent(Entity * e, artemis::component::ComponentType & type);
+
 				template<typename c>
-				artemis::component::Component * getComponent(Entity * e) {
+					artemis::component::Component * getComponent(Entity * e) {
 					artemis::component::ComponentType type = artemis::component::ComponentTypeManager::getTypeFor<c>();
-					artemis::util::Bag<artemis::component::Component*>* bag = componentsByType.get(type.getId());
-					if(bag != nullptr && e->getId() < bag->getCapacity())
-						return bag->get(e->getId());
-					return nullptr;
+					return getComponent(e,type);
 				}
 
 				Entity * getEntity(int entityId);
@@ -44,7 +43,7 @@ namespace artemis {
 				long getTotalCreated();
 				long getTotalRemoved();
 
-				artemis::util::Bag<artemis::component::Component*> getcomponents(Entity * e);
+				artemis::util::Bag<artemis::component::Component*> * getComponents(Entity * e);
 
 
 			private:
@@ -58,7 +57,7 @@ namespace artemis {
 				long totalRemoved;
 
 				artemis::util::Bag<artemis::util::Bag<artemis::component::Component*>*> componentsByType;
-				artemis::util::Bag<artemis::component::Component*> entityComponents;
+				artemis::util::Bag<artemis::component::Component*> * entityComponents;
 
 		};
 

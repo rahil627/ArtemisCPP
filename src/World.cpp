@@ -18,10 +18,14 @@ namespace artemis {
 			return this->delta;
 		}
 
-			SystemManager* World::getSystemManager() {
-				return systemManager;
-			}
+		SystemManager* World::getSystemManager() {
+			return systemManager;
+		}
 
+		EntityManager* World::getEntityManager() {
+			return entityManager;
+		}
+		
 		void World::loopStart() {
 			if(!refreshed.isEmpty()) {
 				for(int i=0; i<refreshed.getCount(); i++) {

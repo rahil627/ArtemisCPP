@@ -16,37 +16,40 @@ namespace artemis {
 
 		void EntityManager::addComponent(Entity * e, Component * c) {
 			ComponentType type = ComponentTypeManager::getTypeFor(typeid(*c));
-			
-			if(type.getId() >= componentsByType.getCapacity()){
+
+			if(type.getId() >= componentsByType.getCapacity()) {
 				//Resize
 				componentsByType.set(type.getId(), nullptr);
 			}
-			
+
 			Bag<Component*> * components = componentsByType.get(type.getId());
-			if(components == nullptr){
+
+			if(components == nullptr) {
 				components = new Bag<Component*>();
 				componentsByType.set(type.getId(), components);
 			}
-			
+
 			components->set(e->getId(), c);
 			e->addTypeBit(type.getBit());
-			
+
 		};
 
 		Entity* EntityManager::create() {
-			
-				Entity * e = this->removedAndAvailable.removeLast();
-				if(e == nullptr){
-					e = new Entity(this->world, nextAvailableId++); 
-				}else {
-					e->reset();
-				}
-				e->setUniqueId(uniqueEntityId++);
-				activeEntities.set(e->getId(),e);
-				count++;
-				totalCreated++;
-				return e;
-			
+
+			Entity * e = this->removedAndAvailable.removeLast();
+
+			if(e == nullptr) {
+				e = new Entity(this->world, nextAvailableId++);
+			} else {
+				e->reset();
+			}
+
+			e->setUniqueId(uniqueEntityId++);
+			activeEntities.set(e->getId(),e);
+			count++;
+			totalCreated++;
+			return e;
+
 		};
 
 		Entity* EntityManager::getEntity(int entityId) {
@@ -65,16 +68,28 @@ namespace artemis {
 			return totalRemoved;
 		};
 
-		Bag<Component*> EntityManager::getcomponents(Entity* e) {
-			entityComponents.clear();
-			
-			for(int i=0; i< componentsByType.getCapacity(); i++)
-			{
+		artemis::component::Component * EntityManager::getComponent(Entity * e, artemis::component::ComponentType & type) {
+
+			artemis::util::Bag<artemis::component::Component*>* bag = componentsByType.get(type.getId());
+
+			if(bag != nullptr && e->getId() < bag->getCapacity())
+				return bag->get(e->getId());
+
+			return nullptr;
+		};
+
+
+		Bag<Component*> * EntityManager::getComponents(Entity* e) {
+			entityComponents->clear();
+
+			for(int i=0; i< componentsByType.getCapacity(); i++) {
 				Bag<Component*> * components = componentsByType.get(i);
-				if(components != nullptr && e->getId() < components->getCapacity()){
+
+				if(components != nullptr && e->getId() < components->getCapacity()) {
 					Component * c = components->get(e->getId());
-					if(c != nullptr){
-						entityComponents.add(c);
+
+					if(c != nullptr) {
+						entityComponents->add(c);
 					}
 				}
 			}
@@ -89,8 +104,8 @@ namespace artemis {
 		void EntityManager::refresh(Entity* e) {
 			SystemManager * systemManager = world->getSystemManager();
 			Bag<EntitySystem*> * systems = systemManager->getSystems();
-			for(int i=0; i< systems->getCount(); i++)
-			{
+
+			for(int i=0; i< systems->getCount(); i++) {
 				systems->get(i)->change(*e);
 			}
 
@@ -113,11 +128,11 @@ namespace artemis {
 		};
 
 		void EntityManager::removeComponentsOfEntity(Entity* e) {
-			for(int i=0; i<componentsByType.getCapacity(); i++)
-			{
+			for(int i=0; i<componentsByType.getCapacity(); i++) {
 				Bag<Component*> * components = componentsByType.get(i);
-				if(components != nullptr && e->getId() < components->getCapacity()){
-					//TODO Destroy/Deallocate components from memory 
+
+				if(components != nullptr && e->getId() < components->getCapacity()) {
+					//TODO Destroy/Deallocate components from memory
 					components->set(e->getId(), nullptr);
 				}
 			}

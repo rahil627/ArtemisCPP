@@ -1,5 +1,5 @@
-#ifndef _SYSTEM_MANAGER_H_
-#define _SYSTEM_MANAGER_H_
+#ifndef SYSTEM_MANAGER_H
+#define SYSTEM_MANAGER_H
 
 #include <typeinfo>
 #include <unordered_map>

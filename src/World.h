@@ -1,5 +1,5 @@
-#ifndef _WORLD_H_
-#define _WORLD_H_
+#ifndef WORLD_H
+#define WORLD_H
 
 #include "SystemManager.h"
 #include "EntityManager.h"

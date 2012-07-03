@@ -1,5 +1,5 @@
-#ifndef _COMPONENT_H_
-#define _COMPONENT_H_
+#ifndef COMPONENT_H
+#define COMPONENT_H
 
 #include <bitset>
 #include "BitSize.h"
