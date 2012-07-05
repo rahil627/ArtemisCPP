@@ -3,32 +3,30 @@
 
 #include <typeinfo>
 #include <unordered_map>
-
 #include "ImmutableBag.h"
 
 namespace artemis {
-	namespace system {
-		
-		class World;
-		class EntitySystem;
-		
-		class SystemManager {
-			public:
-				SystemManager(artemis::system::World *world);
-				void initializeAll();
-				artemis::util::Bag<artemis::system::EntitySystem*> * getSystems();
-				artemis::system::EntitySystem * setSystem(artemis::system::EntitySystem * stm);
 
-				template<typename eSystem>
-				artemis::system::EntitySystem* getSystem() {
-					return (eSystem)(systems[typeid(eSystem).hash_code()]);
-				}
+	class EntitySystem;
+	class Entity;
+	class World;
 
-			private:
-				artemis::system::World * world;
-				std::unordered_map<size_t, artemis::system::EntitySystem*> systems;
-				artemis::util::Bag<artemis::system::EntitySystem*> * bagged;
-		};
+	class SystemManager {
+		public:
+			SystemManager(World *world);
+			void initializeAll();
+			Bag<EntitySystem*> * getSystems();
+			EntitySystem * setSystem(EntitySystem * stm);
+
+			template<typename eSystem>
+			EntitySystem* getSystem() {
+				return (eSystem)(systems[typeid(eSystem).hash_code()]);
+			}
+
+		private:
+			World * world;
+			std::unordered_map<size_t, EntitySystem*> systems;
+			Bag<EntitySystem*> * bagged;
 	};
 };
 #endif // $(Guard token)

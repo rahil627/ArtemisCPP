@@ -5,37 +5,40 @@
 #include "MovementSystem.h"
 #include "MovementComponent.h"
 #include "EntityManager.h"
+#include "SystemManager.h"
 #include "Entity.h"
+#include <unistd.h>
+#include <windows.h>
 
 
 int main(int argc, char **argv) {
 	
-	artemis::system::World w;
-	artemis::system::SystemManager * sm = w.getSystemManager();
+	artemis::World w;
+	artemis::SystemManager * sm = w.getSystemManager();
 	MovementSystem * movementsys = (MovementSystem*)sm->setSystem(new MovementSystem());
-	artemis::system::EntityManager * em = w.getEntityManager();
+	artemis::EntityManager * em = w.getEntityManager();
 	
 	sm->initializeAll();
 	
-	artemis::system::Entity * player = em->create();
+	artemis::Entity * player = em->create();
 	
 	
 	
-	player->addComponent(new MovementComponent(2,2));
+	player->addComponent(new MovementComponent(2,4));
 	player->addComponent(new PositionComponent(0,0));
 	player->refresh();
 	
-	PositionComponent * comp = (PositionComponent*)player->getComponent(artemis::component::ComponentTypeManager::getTypeFor<PositionComponent>());
+	PositionComponent * comp = (PositionComponent*)player->getComponent<PositionComponent>();
 	
 	while(true){
+		
 		w.loopStart();
 		w.setDelta(0.0016f);
 		movementsys->process();
 		
-		std::cout << comp->posX << std::endl;
-		std::cout << comp->posY << std::endl;
-
-		
+		std::cout << "X:"<< comp->posX << std::endl;
+		std::cout << "Y:"<< comp->posY << std::endl;
+		Sleep(160);
 	}
 	
 	

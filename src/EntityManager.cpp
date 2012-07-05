@@ -4,12 +4,9 @@
 #include "BitSize.h"
 #include "World.h"
 #include "Component.h"
-
-using namespace artemis::component;
-using namespace artemis::util;
+#include "Entity.h"
 
 namespace artemis {
-	namespace system {
 		EntityManager::EntityManager(World* world) : componentsByType(64) {
 			this->world = world;
 			
@@ -75,9 +72,9 @@ namespace artemis {
 			return totalRemoved;
 		};
 
-		artemis::component::Component * EntityManager::getComponent(Entity * e, artemis::component::ComponentType & type) {
+		Component * EntityManager::getComponent(Entity * e, ComponentType & type) {
 
-			artemis::util::Bag<artemis::component::Component*>* bag = componentsByType.get(type.getId());
+			Bag<Component*>* bag = componentsByType.get(type.getId());
 
 			if(bag != nullptr && e->getId() < bag->getCapacity())
 				return bag->get(e->getId());
@@ -145,6 +142,4 @@ namespace artemis {
 			}
 
 		};
-
-	};
 };

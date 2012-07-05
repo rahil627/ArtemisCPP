@@ -1,11 +1,10 @@
 #include "SystemManager.h"
 #include "World.h"
 #include "EntitySystem.h"
-using namespace artemis::util;
+#include "SystemBitManager.h"
 
 namespace artemis {
-	namespace system {
-
+	
 		SystemManager::SystemManager(World* world) {
 			this->world = world;
 			bagged = new Bag<EntitySystem*>();
@@ -34,6 +33,4 @@ namespace artemis {
 			
 			return stm;
 		}
-
-	};
 };

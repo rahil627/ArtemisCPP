@@ -3,7 +3,7 @@
 
 #include "Component.h"
 
-class MovementComponent : public artemis::component::Component{
+class MovementComponent : public artemis::Component{
 public:
 	float velocityX;
 	float velocityY;
@@ -14,7 +14,7 @@ public:
 	}
 };
 
-class PositionComponent : public artemis::component::Component{
+class PositionComponent : public artemis::Component{
 	
 	
 public:

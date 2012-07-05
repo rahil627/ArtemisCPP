@@ -2,16 +2,15 @@
 #define ENTITYMANAGER_H
 
 
-#include "Entity.h"
 #include "ImmutableBag.h"
 #include "Component.h"
+#include "ComponentTypeManager.h"
 
 
 namespace artemis {
-	namespace system {
 
+		class Entity;
 		class World;
-		
 		class EntityManager {
 
 			public:
@@ -20,21 +19,21 @@ namespace artemis {
 				void remove(Entity * e);
 				void removeComponentsOfEntity(Entity * e);
 				bool isActive(int entityId);
-				void addComponent(Entity *e, artemis::component::Component * c);
+				void addComponent(Entity *e, Component * c);
 				void refresh(Entity* e);
 
-				void removeComponent(Entity * e, artemis::component::ComponentType & type);
+				void removeComponent(Entity * e, ComponentType & type);
 
 				template<typename c>
 				void removeComponent(Entity * e) {
-					removeComponent(e,artemis::component::ComponentTypeManager::getTypeFor<c>());
+					removeComponent(e,ComponentTypeManager::getTypeFor<c>());
 				}
 
-				artemis::component::Component * getComponent(Entity * e, artemis::component::ComponentType & type);
+				Component * getComponent(Entity * e, ComponentType & type);
 
 				template<typename c>
-					artemis::component::Component * getComponent(Entity * e) {
-					artemis::component::ComponentType type = artemis::component::ComponentTypeManager::getTypeFor<c>();
+					Component * getComponent(Entity * e) {
+					ComponentType type = ComponentTypeManager::getTypeFor<c>();
 					return getComponent(e,type);
 				}
 
@@ -43,25 +42,22 @@ namespace artemis {
 				long getTotalCreated();
 				long getTotalRemoved();
 
-				artemis::util::Bag<artemis::component::Component*> * getComponents(Entity * e);
+				Bag<Component*> * getComponents(Entity * e);
 
 
 			private:
 				World * world;
-				artemis::util::Bag<Entity*> activeEntities;
-				artemis::util::Bag<Entity*> removedAndAvailable;
+				Bag<Entity*> activeEntities;
+				Bag<Entity*> removedAndAvailable;
 				int nextAvailableId;
 				int count;
 				long uniqueEntityId;
 				long totalCreated;
 				long totalRemoved;
 
-				artemis::util::Bag<artemis::util::Bag<artemis::component::Component*>*> componentsByType;
-				artemis::util::Bag<artemis::component::Component*> * entityComponents;
+				Bag<Bag<Component*>*> componentsByType;
+				Bag<Component*> * entityComponents;
 
 		};
-
-
-	};
 };
 #endif // $(Guard token)

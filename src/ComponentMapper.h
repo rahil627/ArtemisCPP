@@ -5,17 +5,16 @@
 #include "World.h"
 
 namespace artemis {
-	namespace component {
-		
+	
 		template<typename c>
 		class ComponentMapper {
 
 			private:
-				artemis::system::EntityManager * em;
+				EntityManager * em;
 
 			public:
 
-				ComponentMapper(artemis::system::World * world) {
+				ComponentMapper(World * world) {
 					em = world->getEntityManager();
 				}
 
@@ -23,11 +22,10 @@ namespace artemis {
 					em = nullptr;
 				}
 
-				c & get(artemis::system::Entity * e) {
+				c & get(Entity * e) {
 					return *(c*)em->getComponent<c>(e);
 				}
 
 		};
-	};
 };
 #endif // $(Guard token)

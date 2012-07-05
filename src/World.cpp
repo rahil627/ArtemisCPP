@@ -1,8 +1,10 @@
 #include "World.h"
 #include "Entity.h"
+#include "SystemManager.h"
+#include "EntityManager.h"
 
 namespace artemis {
-	namespace system {
+
 		World::World() {
 			//TODO add more managers
 			this->systemManager = new SystemManager(this);
@@ -62,7 +64,4 @@ namespace artemis {
 			delete systemManager;
 			delete entityManager;
 		}
-
-
-	};
 };

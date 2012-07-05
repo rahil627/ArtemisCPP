@@ -1,15 +1,12 @@
 #include "Entity.h"
 #include <sstream>
-#include "World.h"
 #include "Component.h"
-#include "EntityManager.h"
+//#include "EntityManager.h"
 
-using namespace artemis::util;
-using namespace artemis::component;
 using namespace std;
 
 namespace artemis {
-	namespace system {
+
 //FIXME Inclusion circulation 
 		Entity::Entity(World * world, int id) {
 			this->world = world;
@@ -114,7 +111,4 @@ namespace artemis {
 		void Entity::remove() {
 			world->deleteEntity(this);
 		}
-
-
-	};
 };

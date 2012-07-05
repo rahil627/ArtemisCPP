@@ -4,8 +4,6 @@
 #include <cstddef>
 
 namespace artemis {
-	namespace util {
-
 		template<typename E>
 		class ImmutableBag {
 			public:
@@ -167,7 +165,6 @@ namespace artemis {
 				}
 
 		};
-	};
 };
 
 #endif // $(Guard token)

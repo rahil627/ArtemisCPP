@@ -10,26 +10,40 @@
   <VirtualDirectory Name="src">
     <VirtualDirectory Name="util">
       <File Name="src/ImmutableBag.h"/>
+      <File Name="src/BitSize.h"/>
     </VirtualDirectory>
-    <File Name="src/BitSize.h"/>
-    <File Name="src/Component.cpp"/>
-    <File Name="src/Component.h"/>
-    <File Name="src/EntitySystem.cpp"/>
-    <File Name="src/EntitySystem.h"/>
     <File Name="main.cpp"/>
-    <File Name="src/Entity.cpp"/>
-    <File Name="src/Entity.h"/>
-    <File Name="src/World.cpp"/>
-    <File Name="src/World.h"/>
-    <File Name="src/SystemManager.cpp"/>
-    <File Name="src/SystemManager.h"/>
-    <File Name="src/EntityManager.cpp"/>
-    <File Name="src/EntityManager.h"/>
     <VirtualDirectory Name="test">
       <File Name="src/MovementSystem.h"/>
       <File Name="src/MovementComponent.h"/>
     </VirtualDirectory>
-    <File Name="src/ComponentMapper.h"/>
+    <VirtualDirectory Name="component">
+      <File Name="src/Component.cpp"/>
+      <File Name="src/Component.h"/>
+      <File Name="src/ComponentMapper.h"/>
+      <File Name="src/ComponentType.h"/>
+      <File Name="src/ComponentType.cpp"/>
+      <File Name="src/ComponentTypeManager.h"/>
+      <File Name="src/ComponentTypeManager.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="system">
+      <File Name="src/EntityProcessingSystem.cpp"/>
+      <File Name="src/EntityProcessingSystem.h"/>
+      <File Name="src/EntitySystem.cpp"/>
+      <File Name="src/EntitySystem.h"/>
+      <File Name="src/Entity.cpp"/>
+      <File Name="src/Entity.h"/>
+      <File Name="src/World.cpp"/>
+      <File Name="src/World.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="manager">
+      <File Name="src/EntityManager.cpp"/>
+      <File Name="src/EntityManager.h"/>
+      <File Name="src/SystemBitManager.cpp"/>
+      <File Name="src/SystemBitManager.h"/>
+      <File Name="src/SystemManager.cpp"/>
+      <File Name="src/SystemManager.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -47,7 +61,7 @@
         <IncludePath Value="src"/>
         <Preprocessor Value="_ARTEMIS_DEBUG"/>
       </Compiler>
-      <Linker Options="-static-libstdc++;" Required="yes"/>
+      <Linker Options="-static-libstdc++;-pg;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
