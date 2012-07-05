@@ -127,6 +127,8 @@ namespace artemis {
 
 		void EntityManager::removeComponent(Entity* e, ComponentType & type) {
 			Bag<Component* > * components = componentsByType.get(type.getId());
+			//TODO Destroy/Deallocate components from memory
+			delete components->get(e->getId());
 			components->set(e->getId(), nullptr);
 			e->removeTypeBit(type.getBit());
 		};
@@ -137,6 +139,7 @@ namespace artemis {
 
 				if(components != nullptr && e->getId() < components->getCapacity()) {
 					//TODO Destroy/Deallocate components from memory
+					delete components->get(e->getId());
 					components->set(e->getId(), nullptr);
 				}
 			}

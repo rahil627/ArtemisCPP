@@ -4,7 +4,7 @@
 #include <typeinfo>
 #include <unordered_map>
 #include "ImmutableBag.h"
-
+#include <iostream>
 namespace artemis {
 
 	class EntitySystem;
@@ -20,7 +20,7 @@ namespace artemis {
 
 			template<typename eSystem>
 			EntitySystem* getSystem() {
-				return (eSystem)(systems[typeid(eSystem).hash_code()]);
+				return (eSystem*)(systems[typeid(eSystem).hash_code()]);
 			}
 
 		private:

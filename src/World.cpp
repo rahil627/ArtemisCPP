@@ -5,63 +5,72 @@
 
 namespace artemis {
 
-		World::World() {
-			//TODO add more managers
-			this->systemManager = new SystemManager(this);
-			this->entityManager = new EntityManager(this);
-		}
+	World::World() {
+		//TODO add more managers
+		this->systemManager = new SystemManager(this);
+		this->entityManager = new EntityManager(this);
+	}
 
-		void World::deleteEntity(Entity* e) {
-			if(!deleted.contains(e))
-				deleted.add(e);
-		}
+	void World::deleteEntity(Entity* e) {
+		if(!deleted.contains(e))
+			deleted.add(e);
+	}
 
-		float World::getDelta() {
-			return this->delta;
-		}
+	float World::getDelta() {
+		return this->delta;
+	}
 
-		SystemManager* World::getSystemManager() {
-			return systemManager;
-		}
+	SystemManager* World::getSystemManager() {
+		return systemManager;
+	}
 
-		EntityManager* World::getEntityManager() {
-			return entityManager;
-		}
-		
-		void World::loopStart() {
-			if(!refreshed.isEmpty()) {
-				for(int i=0; i<refreshed.getCount(); i++) {
-					//TODO ADD  MANAGERs
-					entityManager->refresh(refreshed.get(i));
-				}
+	EntityManager* World::getEntityManager() {
+		return entityManager;
+	}
 
-				refreshed.clear();
-
+	void World::loopStart() {
+		if(!refreshed.isEmpty()) {
+			for(int i=0; i<refreshed.getCount(); i++) {
+				//TODO ADD  MANAGERs
+				entityManager->refresh(refreshed.get(i));
 			}
 
-			if(!deleted.isEmpty()) {
-				for(int i=0; i<deleted.getCount(); i++) {
-					Entity * e = deleted.get(i);
-					//groupManager.remove(e);
-					entityManager->remove(e);
-					//tagManager.remove(e);
-				}
+			refreshed.clear();
 
-				deleted.clear();
+		}
+
+		if(!deleted.isEmpty()) {
+			for(int i=0; i<deleted.getCount(); i++) {
+				Entity * e = deleted.get(i);
+				//groupManager.remove(e);
+				entityManager->remove(e);
+				//tagManager.remove(e);
 			}
 
+			deleted.clear();
 		}
 
-		void World::refreshEntity(Entity* e) {
-			refreshed.add(e);
-		}
+	}
 
-		void World::setDelta(float delta) {
-			this->delta = delta;
-		}
+	Entity* World::createEntity() {
+		return entityManager->create();
+	}
 
-		World::~World() {
-			delete systemManager;
-			delete entityManager;
-		}
+	Entity* World::getEntity(int entityId) {
+		return entityManager->getEntity(entityId);
+	}
+
+
+	void World::refreshEntity(Entity* e) {
+		refreshed.add(e);
+	}
+
+	void World::setDelta(float delta) {
+		this->delta = delta;
+	}
+
+	World::~World() {
+		delete systemManager;
+		delete entityManager;
+	}
 };

@@ -10,6 +10,9 @@ namespace artemis {
 		world = nullptr;
 	}
 
+	int EntitySystem::getEntityCount(){
+		return actives.getCount();
+	}
 
 	void EntitySystem::change(Entity& e) {
 		bool contains = (systemBit & e.getSystemBits()) == systemBit;
@@ -20,7 +23,7 @@ namespace artemis {
 			e.addSystemBit(systemBit);
 			added(e);
 		} else if(!interest && contains && typeFlags.any()) {
-			//this->remove(e);
+			this->remove(e);
 		}
 	}
 

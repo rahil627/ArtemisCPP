@@ -33,6 +33,7 @@ namespace artemis {
 			void setWorld(World *world);
 			void change(Entity &e);
 			void process();
+			int getEntityCount();
 		protected:
 			EntitySystem() { this->world = nullptr; };
 			World * world;

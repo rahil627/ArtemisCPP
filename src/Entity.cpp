@@ -83,6 +83,7 @@ namespace artemis {
 		}
 
 		void Entity::setGroup(string group) {
+			//TODO Uncomment after manager is created
 			//world->getGroupManager().set(group, this);
 		}
 
@@ -91,6 +92,7 @@ namespace artemis {
 		}
 
 		void Entity::setTag(string tag) {
+			//TODO Uncomment after manager is created
 //			world->getTageManager().register(tag, this);
 		}
 

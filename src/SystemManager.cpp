@@ -25,7 +25,8 @@ namespace artemis {
 			stm->setWorld(world);
 			
 			if(!bagged->contains(stm)){
-				systems[typeid(stm).hash_code()]  = stm;
+				
+				systems[typeid(*stm).hash_code()]  = stm;
 				bagged->add(stm);
 			}
 			

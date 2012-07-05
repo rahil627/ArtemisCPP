@@ -12,37 +12,50 @@
 
 
 int main(int argc, char **argv) {
-	
+
 	artemis::World w;
 	artemis::SystemManager * sm = w.getSystemManager();
 	MovementSystem * movementsys = (MovementSystem*)sm->setSystem(new MovementSystem());
 	artemis::EntityManager * em = w.getEntityManager();
-	
+
 	sm->initializeAll();
-	
+
 	artemis::Entity * player = em->create();
-	
-	
-	
+	std::cout << "Entity count:" <<  em->getEntityCount() << "\n";
+	int end =0;
+
 	player->addComponent(new MovementComponent(2,4));
 	player->addComponent(new PositionComponent(0,0));
 	player->refresh();
 	
-	PositionComponent * comp = (PositionComponent*)player->getComponent<PositionComponent>();
 	
-	while(true){
-		
+	PositionComponent * comp = (PositionComponent*)player->getComponent<PositionComponent>();
+
+	while(end <= 10) {
+
 		w.loopStart();
 		w.setDelta(0.0016f);
 		movementsys->process();
-		
+
 		std::cout << "X:"<< comp->posX << std::endl;
 		std::cout << "Y:"<< comp->posY << std::endl;
 		Sleep(160);
+		end++;
+	}
+	std::cout << "Entity count in Movementsystem:" << sm->getSystem<MovementSystem>()->getEntityCount()<< "\n";
+	em->removeComponent<PositionComponent>(player);
+	player->refresh();
+	comp = (PositionComponent*)player->getComponent<PositionComponent>();
+
+	if(comp == nullptr) {
+		std::cout << "Component is deleted\n";
 	}
 	
-	
-	//std::cin.get();
+	em->remove(player);
+	std::cout << "Entity count in Movementsystem:" << sm->getSystem<MovementSystem>()->getEntityCount()<< "\n";
+	//std::cout << "Entity count:" <<  em->getEntityCount() << "\n";
+
+	std::cin.get();
 	//delete ent;
 	return 0;
 }
