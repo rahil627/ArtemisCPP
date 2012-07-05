@@ -27,40 +27,118 @@ AtermisCPP is an attempt to port the Artemis framework, written in Java, to C++
 [ ]"FastMath"  
 [ ]"Timer"  
 [ ]"TrigLUT"  
-[ ]"Utils"  
+[ ]"Utils" 
+ 
 ***
+
 >Note:  
 >This project is created with CodeLite.   
 >Working with GCC(mingw) 4.6.2; Enabled experimental c++0x with -std=c++0x (It requires the new standard features)  
 >Documentation and whatnot will be done when every component is in place and working.
+
 ***
-log:  
-[dd-mm-yyy]5-7-12:  
 
-*  Needs memory management.  
-*  Fixt circular dependencies for now.
-*  Able to use  
+example:
 
-        myEntity->getComponent<MyComponentClass>(); 
+Our Movement component ( should probably called VelocityComponent) And our Position component.  
 
-Instead of     
+	class MovementComponent : public artemis::Component
+	{
+	public:
+		float velocityX;
+		float velocityY;
+		
+		MovementComponent(float velocityX, float velocityY)
+		{
+			this->velocityX = velocityX;
+			this->velocityY = velocityY;
+		};
+	};
+	
+	class PositionComponent : public artemis::Component
+    {
+		
+	public:
+		float posX;
+		float posY;
+		PositionComponent(float posX, float posY)
+		{
+			this->posX = posX;
+			this->posY = posY;
+		};
+	};
+	
+Our system that allows for he positions to be updated  
+				
+	class MovementSystem : public artemis::EntityProcessingSystem
+	{
+	private:
+		artemis::ComponentMapper<MovementComponent> * velocityMapper;
+		artemis::ComponentMapper<PositionComponent> * positionMapper;
+	
+	public:
+		MovementSystem() 
+		{
+			setComponentTypes<MovementComponent,PositionComponent>();
+		};
+	
+		virtual void initialize() 
+		{
+			velocityMapper = new artemis::ComponentMapper<MovementComponent>(world);
+			positionMapper = new artemis::ComponentMapper<PositionComponent>(world);
+		};
+	
+		virtual void work(artemis::Entity* e) 
+		{
+			positionMapper->get(e).posX += velocityMapper->get(e).velocityX * world->getDelta();
+			positionMapper->get(e).posY += velocityMapper->get(e).velocityY * world->getDelta();
+		};
+	
+		~MovementSystem() 
+		{
+			delete velocityMapper;
+			delete positionMapper;
+		};
+	};
 
-          myEntity>getComponent(artemis::ComponentTypeManager::getTypeFor<MyComponentClass>());  
+Our test run  
 
-+Flattened namespace to artemis:: instead of artemis::component:: etc.  
+	int main(int argc, char **argv) {
+		
+		artemis::World world;
+		artemis::SystemManager * sm = world.getSystemManager();
+		MovementSystem * movementsys = (MovementSystem*)sm->setSystem(new MovementSystem());
+		artemis::EntityManager * em = world.getEntityManager();
+		
+		sm->initializeAll();
+		
+		artemis::Entity * player = em->create();
+		
+		
+		
+		player->addComponent(new MovementComponent(2,4));
+		player->addComponent(new PositionComponent(0,0));
+		player->refresh();
+		
+		PositionComponent * comp = (PositionComponent*)player->getComponent<PositionComponent>();
+		
+		while(true){
+			
+			world.loopStart();
+			world.setDelta(0.0016f);
+			movementsys->process();
+			
+			std::cout << "X:"<< comp->posX << std::endl;
+			std::cout << "Y:"<< comp->posY << std::endl;
+			Sleep(160);
+		}
+		
+		
+		//std::cin.get();
+		//delete ent;
+		return 0;
+	}
 ***
-[dd-mm-yyy]3-7-12:  
-
-* Needs a lot of refractoring. Classes need to be disected in to seperate files.  
-* Having some Circular dependency issues. In Entity can't use template function:  
-
-        myEntity->getComponent<MyComponentClass>();  
-
-* For now this is the only solution:  
-
-        myEntity->getComponent(artemis::component::ComponentTypeManager::getTypeFor<MyComponentClass>());  
-
-* Need to reduce pointer usage.  
 
 
 Sidar Talei 2012
