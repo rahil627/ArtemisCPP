@@ -32,7 +32,7 @@ namespace artemis {
 		if(!refreshed.isEmpty()) {
 			for(int i=0; i<refreshed.getCount(); i++) {
 				//TODO ADD  MANAGERs
-				entityManager->refresh(refreshed.get(i));
+				entityManager->refresh(*refreshed.get(i));
 			}
 
 			refreshed.clear();
@@ -41,7 +41,7 @@ namespace artemis {
 
 		if(!deleted.isEmpty()) {
 			for(int i=0; i<deleted.getCount(); i++) {
-				Entity * e = deleted.get(i);
+				Entity & e = *deleted.get(i);
 				//groupManager.remove(e);
 				entityManager->remove(e);
 				//tagManager.remove(e);
@@ -52,7 +52,7 @@ namespace artemis {
 
 	}
 
-	Entity* World::createEntity() {
+	Entity& World::createEntity() {
 		return entityManager->create();
 	}
 

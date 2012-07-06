@@ -12,8 +12,8 @@ namespace artemis {
 
 		protected:
 			EntityProcessingSystem() {};
-			virtual void work(Entity *e) = 0;
-			void processEntities(ImmutableBag<Entity*> * bag);
+			virtual void processEntity(Entity &e) = 0;
+			void processEntities(ImmutableBag<Entity*> & bag);
 			virtual bool checkProcessing();
 	};
 };

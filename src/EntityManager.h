@@ -15,24 +15,24 @@ namespace artemis {
 
 			public:
 				EntityManager(World * world);
-				Entity * create();
-				void remove(Entity * e);
-				void removeComponentsOfEntity(Entity * e);
+				Entity & create();
+				void remove(Entity &e);
+				void removeComponentsOfEntity(Entity & e);
 				bool isActive(int entityId);
-				void addComponent(Entity *e, Component * c);
-				void refresh(Entity* e);
+				void addComponent(Entity &e, Component * c);
+				void refresh(Entity &e);
 
-				void removeComponent(Entity * e, ComponentType & type);
+				void removeComponent(Entity & e, ComponentType & type);
 
 				template<typename c>
-				void removeComponent(Entity * e) {
+				void removeComponent(Entity & e) {
 					removeComponent(e,ComponentTypeManager::getTypeFor<c>());
 				}
 
-				Component * getComponent(Entity * e, ComponentType & type);
+				Component * getComponent(Entity & e, ComponentType & type);
 
 				template<typename c>
-					Component * getComponent(Entity * e) {
+					Component * getComponent(Entity & e) {
 					ComponentType type = ComponentTypeManager::getTypeFor<c>();
 					return getComponent(e,type);
 				}
@@ -42,7 +42,7 @@ namespace artemis {
 				long getTotalCreated();
 				long getTotalRemoved();
 
-				Bag<Component*> * getComponents(Entity * e);
+				Bag<Component*> * getComponents(Entity & e);
 
 
 			private:

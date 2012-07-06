@@ -75,27 +75,23 @@ Our system that allows for he positions to be updated
 	private:
 		artemis::ComponentMapper<MovementComponent> * velocityMapper;
 		artemis::ComponentMapper<PositionComponent> * positionMapper;
-	
+
 	public:
-		MovementSystem() 
-		{
+		MovementSystem() {
 			setComponentTypes<MovementComponent,PositionComponent>();
 		};
-	
-		virtual void initialize() 
-		{
+
+		virtual void initialize() {
 			velocityMapper = new artemis::ComponentMapper<MovementComponent>(world);
 			positionMapper = new artemis::ComponentMapper<PositionComponent>(world);
 		};
-	
-		virtual void work(artemis::Entity* e) 
-		{
-			positionMapper->get(e).posX += velocityMapper->get(e).velocityX * world->getDelta();
-			positionMapper->get(e).posY += velocityMapper->get(e).velocityY * world->getDelta();
+
+		virtual void processEntity(artemis::Entity &e) {
+			positionMapper->get(e)->posX += velocityMapper->get(e)->velocityX * world->getDelta();
+			positionMapper->get(e)->posY += velocityMapper->get(e)->velocityY * world->getDelta();
 		};
-	
-		~MovementSystem() 
-		{
+
+		~MovementSystem() {
 			delete velocityMapper;
 			delete positionMapper;
 		};
@@ -112,15 +108,15 @@ Our test run
 		
 		sm->initializeAll();
 		
-		artemis::Entity * player = em->create();
+		artemis::Entity & player = em->create();
 		
 		
 		
-		player->addComponent(new MovementComponent(2,4));
-		player->addComponent(new PositionComponent(0,0));
-		player->refresh();
+		player.addComponent(new MovementComponent(2,4));
+		player.addComponent(new PositionComponent(0,0));
+		player.refresh();
 		
-		PositionComponent * comp = (PositionComponent*)player->getComponent<PositionComponent>();
+		PositionComponent * comp = (PositionComponent*)player.getComponent<PositionComponent>();
 		
 		while(true){
 			
@@ -133,9 +129,6 @@ Our test run
 			Sleep(160);
 		}
 		
-		
-		//std::cin.get();
-		//delete ent;
 		return 0;
 	}
 ***

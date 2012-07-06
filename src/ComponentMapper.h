@@ -21,9 +21,14 @@ namespace artemis {
 				~ComponentMapper() {
 					em = nullptr;
 				}
-
-				c & get(Entity * e) {
-					return *(c*)em->getComponent<c>(e);
+				
+				/**
+				 *Returns the component mapped to the Entity.
+				 *If there is no such component associated with the entity
+				 *nullptr is returned.
+				 */
+				c * get(Entity & e) {
+					return (c*)em->getComponent<c>(e);
 				}
 
 		};

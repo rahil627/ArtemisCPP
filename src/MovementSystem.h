@@ -23,9 +23,9 @@ class MovementSystem : public artemis::EntityProcessingSystem {
 			positionMapper = new artemis::ComponentMapper<PositionComponent>(world);
 		};
 
-		virtual void work(artemis::Entity* e) {
-			positionMapper->get(e).posX += velocityMapper->get(e).velocityX * world->getDelta();
-			positionMapper->get(e).posY += velocityMapper->get(e).velocityY * world->getDelta();
+		virtual void processEntity(artemis::Entity &e) {
+			positionMapper->get(e)->posX += velocityMapper->get(e)->velocityX * world->getDelta();
+			positionMapper->get(e)->posY += velocityMapper->get(e)->velocityY * world->getDelta();
 		};
 
 		~MovementSystem() {

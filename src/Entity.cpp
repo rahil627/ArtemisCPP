@@ -29,11 +29,11 @@ namespace artemis {
 		}
 
 		Component* Entity::getComponent(ComponentType & type) {
-			return entityManager->getComponent(this, type);
+			return entityManager->getComponent(*this, type);
 		}
 
 		ImmutableBag<Component*> * Entity::getComponents() {
-			return entityManager->getComponents(this);
+			return entityManager->getComponents(*this);
 		}
 
 		int Entity::getId() {
@@ -61,11 +61,11 @@ namespace artemis {
 		}
 
 		void Entity::addComponent(Component * c){
-			entityManager->addComponent(this,c);
+			entityManager->addComponent(*this,c);
 		}
 		
 		void Entity::removeComponent(ComponentType & type) {
-			entityManager->removeComponent(this, type);
+			entityManager->removeComponent(*this, type);
 		}
 
 		void Entity::removeSystemBit(bitset<BITSIZE> bit) {
