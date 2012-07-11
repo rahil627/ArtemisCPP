@@ -3,6 +3,7 @@
 
 
 #include "ImmutableBag.h"
+#include "TagManager.h"
 
 namespace artemis {
 	class Entity;
@@ -15,7 +16,7 @@ namespace artemis {
 			~World();
 			SystemManager * getSystemManager();
 			EntityManager * getEntityManager();
-			//TagManager *   getTagManager();
+			TagManager *   getTagManager();
 			//GroupManager * getGroupManager();
 			float getDelta();
 			void setDelta(float delta);
@@ -30,7 +31,7 @@ namespace artemis {
 		private:
 			SystemManager * systemManager;
 			EntityManager * entityManager;
-			//TagManager * tagManager;
+			TagManager * tagManager;
 			//GroupManager * grouManager;
 			float delta;
 			Bag<Entity*> refreshed;

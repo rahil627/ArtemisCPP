@@ -14,7 +14,7 @@ namespace artemis {
 		class EntityManager {
 
 			public:
-				EntityManager(World * world);
+				EntityManager(World& world);
 				Entity & create();
 				void remove(Entity &e);
 				void removeComponentsOfEntity(Entity & e);

@@ -5,8 +5,8 @@
 
 namespace artemis {
 	
-		SystemManager::SystemManager(World* world) {
-			this->world = world;
+		SystemManager::SystemManager(World& world) {
+			this->world = &world;
 			bagged = new Bag<EntitySystem*>();
 		}
 

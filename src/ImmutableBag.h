@@ -22,11 +22,42 @@ namespace artemis {
 					init(64);
 				};
 
-
+				
 				Bag(int capacity) {
 					init(capacity);
 				};
+	
+				/**
+				 *  If set(int index, E o) is used, the bag might
+				 *  contain gaps between indexes. Use this to get a 
+				 *  complete bag. No changes will be made to the original bag.
+				 */
+				Bag<E> & getGapless(){
+					
+					Bag<E> bag(this->count);
+					int c = 0;
+					
+					for(int i=0; i < this->size; i++)
+					{
+						if(this->data[i] != nullptr){
+							bag.add(data[i]);
+						}
+					}
+					
+					return bag;
 
+				}
+				
+				/**
+				 * Adds an object to the bag.
+				 * Mixing add and set is not encouraged. 
+				 * Note: set can create gaps between indexes where 
+				 * the object count is irrelevant to the order.
+				 * 
+				 * Autmatically grows the bag if necessary.
+				 *
+				 * @param o The object to be added.
+				 **/
 				void add(E o) {
 					if(size == count)grow();
 
@@ -36,7 +67,7 @@ namespace artemis {
 				void addAll(Bag<E> & bag) {
 
 					for(int i=0; i < bag.size ; i++) {
-						addItem(bag.data[i]);
+						add(bag.data[i]);
 					}
 				};
 
@@ -64,6 +95,10 @@ namespace artemis {
 
 				virtual int getCapacity() {return size;};
 				virtual bool isEmpty() {return count == 0;};
+				/**
+				 * Returns the amount of objects in the bag.
+				 * 
+				 **/
 				virtual int getCount() {return count;};
 
 				bool remove(E o) {
@@ -117,7 +152,16 @@ namespace artemis {
 
 
 				bool set(int index, E o) {
+					
 					if(index > size) grow(index*2);;
+
+					
+					if(o == nullptr && data[index] != nullptr){
+						count--;
+					}
+					else if(data[index] == nullptr){
+						count++;
+					};
 
 					data[index] = o;
 					return true;

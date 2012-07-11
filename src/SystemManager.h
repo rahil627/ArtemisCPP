@@ -13,7 +13,7 @@ namespace artemis {
 
 	class SystemManager {
 		public:
-			SystemManager(World *world);
+			SystemManager(World &world);
 			void initializeAll();
 			Bag<EntitySystem*> * getSystems();
 			EntitySystem * setSystem(EntitySystem * stm);

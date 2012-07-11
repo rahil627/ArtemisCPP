@@ -43,6 +43,8 @@
       <File Name="src/SystemBitManager.h"/>
       <File Name="src/SystemManager.cpp"/>
       <File Name="src/SystemManager.h"/>
+      <File Name="src/TagManager.h"/>
+      <File Name="src/TagManager.cpp"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">

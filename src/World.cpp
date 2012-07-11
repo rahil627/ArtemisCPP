@@ -3,12 +3,14 @@
 #include "SystemManager.h"
 #include "EntityManager.h"
 
+
 namespace artemis {
 
 	World::World() {
 		//TODO add more managers
-		this->systemManager = new SystemManager(this);
-		this->entityManager = new EntityManager(this);
+		this->systemManager = new SystemManager(*this);
+		this->entityManager = new EntityManager(*this);
+		this->tagManager = new TagManager(*this);
 	}
 
 	void World::deleteEntity(Entity* e) {
@@ -27,6 +29,10 @@ namespace artemis {
 	EntityManager* World::getEntityManager() {
 		return entityManager;
 	}
+	
+	TagManager* World::getTagManager(){
+		return tagManager;
+	}
 
 	void World::loopStart() {
 		if(!refreshed.isEmpty()) {
@@ -44,7 +50,7 @@ namespace artemis {
 				Entity & e = *deleted.get(i);
 				//groupManager.remove(e);
 				entityManager->remove(e);
-				//tagManager.remove(e);
+				tagManager->remove(e);
 			}
 
 			deleted.clear();

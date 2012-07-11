@@ -5,6 +5,7 @@
 #include "EntityProcessingSystem.h"
 #include "MovementComponent.h"
 #include "ComponentMapper.h"
+#include <stdlib.h>//needs these three lines
 
 
 class MovementSystem : public artemis::EntityProcessingSystem {
@@ -18,14 +19,34 @@ class MovementSystem : public artemis::EntityProcessingSystem {
 			setComponentTypes<MovementComponent,PositionComponent>();
 		};
 
+		virtual void begin(){
+			system("cls");
+			std::cout << "Starting MovementSystem======================" <<  std::endl;
+		}
+
+		virtual void end(){
+				
+			std::cout << "Ending MovementSystem======================" <<  std::endl;
+		}
+
 		virtual void initialize() {
 			velocityMapper = new artemis::ComponentMapper<MovementComponent>(world);
 			positionMapper = new artemis::ComponentMapper<PositionComponent>(world);
 		};
 
 		virtual void processEntity(artemis::Entity &e) {
-			positionMapper->get(e)->posX += velocityMapper->get(e)->velocityX * world->getDelta();
-			positionMapper->get(e)->posY += velocityMapper->get(e)->velocityY * world->getDelta();
+			
+			PositionComponent & p = *positionMapper->get(e);
+			MovementComponent & v = *velocityMapper->get(e);
+			
+			p.posX += v.velocityX * world->getDelta();
+			p.posY += v.velocityY * world->getDelta();
+			
+			std::cout <<  std::endl;
+			std::cout << "X:"<< p.posX << std::endl;
+			std::cout << "Y:"<< p.posY << std::endl;
+			std::cout <<  std::endl;
+			
 		};
 
 		~MovementSystem() {

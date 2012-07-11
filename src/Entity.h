@@ -15,7 +15,6 @@ namespace artemis {
 
 	class Component;
 	class ComponentType;
-	
 	//class EntityManager;
 	
 	class Entity {
@@ -34,7 +33,7 @@ namespace artemis {
 			~Entity();
 			int getId();
 			void setUniqueId(long int uniqueId);
-			long int getUniqueID();
+			long int getUniqueId();
 
 			std::bitset<BITSIZE> getTypeBits();
 			void addTypeBit(std::bitset<BITSIZE> bit);

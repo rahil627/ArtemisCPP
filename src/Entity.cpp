@@ -7,7 +7,6 @@ using namespace std;
 
 namespace artemis {
 
-//FIXME Inclusion circulation 
 		Entity::Entity(World * world, int id) {
 			this->world = world;
 			this->entityManager = world->getEntityManager();
@@ -48,7 +47,7 @@ namespace artemis {
 			return typeBits;
 		}
 
-		long int Entity::getUniqueID() {
+		long int Entity::getUniqueId() {
 			return uniqueId;
 		}
 
@@ -92,8 +91,7 @@ namespace artemis {
 		}
 
 		void Entity::setTag(string tag) {
-			//TODO Uncomment after manager is created
-//			world->getTageManager().register(tag, this);
+			world->getTagManager()->subscribe(tag, *this);
 		}
 
 		void Entity::setTypeBits(bitset<BITSIZE> typeBits) {

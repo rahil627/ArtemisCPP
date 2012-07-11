@@ -7,8 +7,8 @@
 #include "Entity.h"
 
 namespace artemis {
-		EntityManager::EntityManager(World* world) : componentsByType(64) {
-			this->world = world;
+		EntityManager::EntityManager(World& world) : componentsByType(64) {
+			this->world = &world;
 			
 				nextAvailableId = 0;
 				count = 0;
