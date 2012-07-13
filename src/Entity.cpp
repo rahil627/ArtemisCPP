@@ -81,16 +81,15 @@ namespace artemis {
 			
 		}
 
-		void Entity::setGroup(string group) {
-			//TODO Uncomment after manager is created
-			//world->getGroupManager().set(group, this);
+		void Entity::setGroup(string& group) {
+			world->getGroupManager()->set(group, *this);
 		}
 
 		void Entity::setSystemBits(bitset<BITSIZE> systemBits) {
 			this->systemBits = systemBits;
 		}
 
-		void Entity::setTag(string tag) {
+		void Entity::setTag(string& tag) {
 			world->getTagManager()->subscribe(tag, *this);
 		}
 

@@ -174,7 +174,7 @@ namespace artemis {
 
 
 				~Bag<E>() {
-
+					delete[] data;
 
 				};
 

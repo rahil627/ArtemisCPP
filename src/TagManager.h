@@ -7,15 +7,16 @@
 
 namespace artemis {
 
-	class World;
+	//class World;
 	class Entity;
 
 	class TagManager {
 		private:
-			World * world;
+			//World * world;
 			std::unordered_map<std::string, Entity*> tagByEntity;
 		public:
-			TagManager(World &world);
+			//TagManager(World &world);
+			TagManager();
 			void subscribe(const std::string tag, Entity &e);
 			void unSubscribe(const std::string tag);
 			bool isSubscribed(const std::string tag);

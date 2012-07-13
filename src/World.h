@@ -4,6 +4,7 @@
 
 #include "ImmutableBag.h"
 #include "TagManager.h"
+#include "GroupManager.h"
 
 namespace artemis {
 	class Entity;
@@ -17,7 +18,7 @@ namespace artemis {
 			SystemManager * getSystemManager();
 			EntityManager * getEntityManager();
 			TagManager *   getTagManager();
-			//GroupManager * getGroupManager();
+			GroupManager * getGroupManager();
 			float getDelta();
 			void setDelta(float delta);
 			void deleteEntity(Entity *e);
@@ -32,7 +33,7 @@ namespace artemis {
 			SystemManager * systemManager;
 			EntityManager * entityManager;
 			TagManager * tagManager;
-			//GroupManager * grouManager;
+			GroupManager * groupManager;
 			float delta;
 			Bag<Entity*> refreshed;
 			Bag<Entity*> deleted;

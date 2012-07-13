@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=11-7-2012
+Date                   :=14-7-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -53,7 +53,7 @@ LibPath                := $(LibraryPathSwitch).
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
 Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentType$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentTypeManager$(ObjectSuffix) $(IntermediateDirectory)/src_EntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_Entity$(ObjectSuffix) $(IntermediateDirectory)/src_World$(ObjectSuffix) $(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemBitManager$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) 
+	$(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -172,6 +172,14 @@ $(IntermediateDirectory)/src_TagManager$(DependSuffix): src/TagManager.cpp
 $(IntermediateDirectory)/src_TagManager$(PreprocessSuffix): src/TagManager.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_TagManager$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/TagManager.cpp"
 
+$(IntermediateDirectory)/src_GroupManager$(ObjectSuffix): src/GroupManager.cpp $(IntermediateDirectory)/src_GroupManager$(DependSuffix)
+	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/GroupManager.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_GroupManager$(DependSuffix): src/GroupManager.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) -MF$(IntermediateDirectory)/src_GroupManager$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/GroupManager.cpp"
+
+$(IntermediateDirectory)/src_GroupManager$(PreprocessSuffix): src/GroupManager.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_GroupManager$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/GroupManager.cpp"
+
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
 ##
@@ -214,6 +222,9 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_TagManager$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_TagManager$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_GroupManager$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_GroupManager$(PreprocessSuffix)
 	$(RM) $(OutputFile)
 	$(RM) $(OutputFile).exe
 	$(RM) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-debug\Artemis"

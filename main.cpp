@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <windows.h>
 #include "TagManager.h"
+#include "GroupManager.h"
 
 int main(int argc, char **argv) {
 
@@ -18,6 +19,7 @@ int main(int argc, char **argv) {
 	artemis::SystemManager & sm = *w.getSystemManager();
 	artemis::EntityManager & em = *w.getEntityManager();
 	artemis::TagManager	   & tm = *w.getTagManager();
+	artemis::GroupManager  & gm = *w.getGroupManager();
 	
 	
 	MovementSystem * movementsys = (MovementSystem*)sm.setSystem(new MovementSystem());
@@ -50,6 +52,22 @@ int main(int argc, char **argv) {
 	
 	tm.subscribe("player1",player);
 	artemis::Entity & playerRef = tm.getEntity("player1");
+	
+	gm.set("Test",player);
+	
+	std::cout << (gm.isGrouped(player) ? "Player is grouped": "Player is not grouped") << "\n";
+	std::cin.get();
+	
+	std::cout << (gm.isInGroup("Test",player) ? ("Player is in group " + gm.getGroupOf(player)): "Player is not grouped") << "\n";
+	std::cin.get();
+	
+	gm.remove(player);
+	
+	std::cout << (gm.isGrouped(player) ? "Player is grouped": "Player is not grouped") << "\n";
+	std::cin.get();
+	
+	std::cout << (gm.isInGroup("Test",player) ? ("Player is in group " + gm.getGroupOf(player)): "Player is not grouped") << "\n";
+	std::cin.get();
 	
 	
 	

@@ -45,6 +45,8 @@
       <File Name="src/SystemManager.h"/>
       <File Name="src/TagManager.h"/>
       <File Name="src/TagManager.cpp"/>
+      <File Name="src/GroupManager.cpp"/>
+      <File Name="src/GroupManager.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">

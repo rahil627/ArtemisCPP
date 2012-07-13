@@ -1,11 +1,11 @@
 #include "TagManager.h"
-#include "World.h"
+//#include "World.h"
 #include "Entity.h"
 
 namespace artemis {
 
-	TagManager::TagManager(World &world) {
-		this->world = &world;
+	TagManager::TagManager() {
+		//this->world = &world;
 	}
 
 	Entity& TagManager::getEntity(const std::string tag) {
