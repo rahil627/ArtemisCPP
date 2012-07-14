@@ -16,6 +16,7 @@
     <VirtualDirectory Name="test">
       <File Name="src/MovementSystem.h"/>
       <File Name="src/MovementComponent.h"/>
+      <File Name="src/DMovementSystem.h"/>
     </VirtualDirectory>
     <VirtualDirectory Name="component">
       <File Name="src/Component.cpp"/>
@@ -35,6 +36,10 @@
       <File Name="src/Entity.h"/>
       <File Name="src/World.cpp"/>
       <File Name="src/World.h"/>
+      <File Name="src/DelayedEntitySystem.h"/>
+      <File Name="src/DelayedEntitySystem.cpp"/>
+      <File Name="src/DelayedEntityProcessingSystem.h"/>
+      <File Name="src/DelayedEntityProcessingSystem.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="manager">
       <File Name="src/EntityManager.cpp"/>

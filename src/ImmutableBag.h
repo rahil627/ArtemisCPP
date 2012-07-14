@@ -71,6 +71,9 @@ namespace artemis {
 					}
 				};
 
+				/**
+				 * Sets every pointer to nullptrs. Does not delete data.
+				 */
 				void clear() {
 					for(int i=0; i<size; i++) {
 						data[i] = nullptr;
@@ -175,7 +178,6 @@ namespace artemis {
 
 				~Bag<E>() {
 					delete[] data;
-
 				};
 
 

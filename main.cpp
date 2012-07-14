@@ -3,6 +3,7 @@
 #include <iostream>
 #include "World.h"
 #include "MovementSystem.h"
+#include "DMovementsystem.h"
 #include "MovementComponent.h"
 #include "EntityManager.h"
 #include "SystemManager.h"
@@ -18,11 +19,12 @@ int main(int argc, char **argv) {
 	
 	artemis::SystemManager & sm = *w.getSystemManager();
 	artemis::EntityManager & em = *w.getEntityManager();
-	artemis::TagManager	   & tm = *w.getTagManager();
-	artemis::GroupManager  & gm = *w.getGroupManager();
+	//artemis::TagManager	   & tm = *w.getTagManager();
+	//artemis::GroupManager  & gm = *w.getGroupManager();
 	
 	
-	MovementSystem * movementsys = (MovementSystem*)sm.setSystem(new MovementSystem());
+	//MovementSystem * movementsys = (MovementSystem*)sm.setSystem(new MovementSystem());
+	DMovementSystem * movementsys = (DMovementSystem*)sm.setSystem(new DMovementSystem());
 	sm.initializeAll();
 
 	
@@ -50,15 +52,21 @@ int main(int argc, char **argv) {
 	player4.addComponent(new PositionComponent(0,0));
 	player4.refresh();
 	
-	tm.subscribe("player1",player);
+	/*tm.subscribe("player1",player);
+	player4.setGroup("LOL");
+	player4.setTag("AAA");
+	
 	artemis::Entity & playerRef = tm.getEntity("player1");
 	
 	gm.set("Test",player);
 	
 	std::cout << (gm.isGrouped(player) ? "Player is grouped": "Player is not grouped") << "\n";
+	std::cout << (gm.isGrouped(player4) ? "Player4 is grouped": "Player is not grouped") << "\n";
 	std::cin.get();
 	
 	std::cout << (gm.isInGroup("Test",player) ? ("Player is in group " + gm.getGroupOf(player)): "Player is not grouped") << "\n";
+	std::cout << (gm.isInGroup("LOL",player4) ? ("Player is in group " + gm.getGroupOf(player)): "Player is not grouped") << "\n";
+	std::cout << tm.getEntity("AAA").getId() << " " <<  player4.getId();
 	std::cin.get();
 	
 	gm.remove(player);
@@ -80,7 +88,7 @@ int main(int argc, char **argv) {
 	std::cin.get();
 	
 	std::cout << (playerRef.isActive() ? "Player 1 Active": "Player 1 is Not Active") << "\n";
-	std::cin.get();
+	std::cin.get();*/
 	
 	
 	int i = 0;
@@ -93,12 +101,15 @@ int main(int argc, char **argv) {
 	
 	PositionComponent * comp = (PositionComponent*)player.getComponent<PositionComponent>();
 
+	movementsys->start(100000.0f);
+
 	while(true) {
 
 		w.loopStart();
 		w.setDelta(0.0016f);
 		movementsys->process();
-		Sleep(160);
+
+		//Sleep(160);
 		//end++;
 	}
 

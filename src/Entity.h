@@ -70,8 +70,8 @@ namespace artemis {
 			bool isActive();
 			void refresh();
 			void remove();
-			void setGroup(std::string& group);
-			void setTag(std::string& tag);
+			void setGroup(std::string group);
+			void setTag(std::string tag);
 
 
 	};

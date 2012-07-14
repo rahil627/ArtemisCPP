@@ -52,8 +52,8 @@ LibPath                := $(LibraryPathSwitch).
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
-Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentType$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentTypeManager$(ObjectSuffix) $(IntermediateDirectory)/src_EntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_Entity$(ObjectSuffix) $(IntermediateDirectory)/src_World$(ObjectSuffix) $(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemBitManager$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentType$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentTypeManager$(ObjectSuffix) $(IntermediateDirectory)/src_EntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_Entity$(ObjectSuffix) $(IntermediateDirectory)/src_World$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemBitManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -140,6 +140,22 @@ $(IntermediateDirectory)/src_World$(DependSuffix): src/World.cpp
 $(IntermediateDirectory)/src_World$(PreprocessSuffix): src/World.cpp
 	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_World$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/World.cpp"
 
+$(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix): src/DelayedEntitySystem.cpp $(IntermediateDirectory)/src_DelayedEntitySystem$(DependSuffix)
+	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntitySystem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_DelayedEntitySystem$(DependSuffix): src/DelayedEntitySystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix) -MF$(IntermediateDirectory)/src_DelayedEntitySystem$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntitySystem.cpp"
+
+$(IntermediateDirectory)/src_DelayedEntitySystem$(PreprocessSuffix): src/DelayedEntitySystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_DelayedEntitySystem$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntitySystem.cpp"
+
+$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix): src/DelayedEntityProcessingSystem.cpp $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(DependSuffix)
+	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntityProcessingSystem.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(DependSuffix): src/DelayedEntityProcessingSystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix) -MF$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntityProcessingSystem.cpp"
+
+$(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(PreprocessSuffix): src/DelayedEntityProcessingSystem.cpp
+	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/DelayedEntityProcessingSystem.cpp"
+
 $(IntermediateDirectory)/src_EntityManager$(ObjectSuffix): src/EntityManager.cpp $(IntermediateDirectory)/src_EntityManager$(DependSuffix)
 	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/EntityManager.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_EntityManager$(DependSuffix): src/EntityManager.cpp
@@ -210,6 +226,12 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_World$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_World$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_World$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntitySystem$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntitySystem$(PreprocessSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(DependSuffix)
+	$(RM) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/src_EntityManager$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_EntityManager$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_EntityManager$(PreprocessSuffix)
