@@ -9,6 +9,7 @@ namespace artemis {
 			float delay;
 			float acc;
 			bool running;
+			bool autoRepeat;
 		protected:
 			virtual void processEntities(ImmutableBag<Entity*> & bag);
 			virtual void processEntities(ImmutableBag<Entity*> & bag, float accumulatedDelta) = 0;
@@ -17,6 +18,7 @@ namespace artemis {
 			DelayedEntitySystem();
 			void start(float delay);
 			void stop();
+			void setAutoRepeat(bool repeat);
 			float getInitialTimeDelay();
 			float getRemainingTime();
 			bool isRunning();

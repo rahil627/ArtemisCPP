@@ -23,8 +23,8 @@ int main(int argc, char **argv) {
 	//artemis::GroupManager  & gm = *w.getGroupManager();
 	
 	
-	//MovementSystem * movementsys = (MovementSystem*)sm.setSystem(new MovementSystem());
-	DMovementSystem * movementsys = (DMovementSystem*)sm.setSystem(new DMovementSystem());
+	MovementSystem * movementsys = (MovementSystem*)sm.setSystem(new MovementSystem());
+	DMovementSystem * dmovementsys = (DMovementSystem*)sm.setSystem(new DMovementSystem());
 	sm.initializeAll();
 
 	
@@ -101,13 +101,14 @@ int main(int argc, char **argv) {
 	
 	PositionComponent * comp = (PositionComponent*)player.getComponent<PositionComponent>();
 
-	movementsys->start(100000.0f);
-
+	dmovementsys->start(3000.0f);
+	dmovementsys->setAutoRepeat(true);
 	while(true) {
 
 		w.loopStart();
-		w.setDelta(0.0016f);
-		movementsys->process();
+		w.setDelta(0.00016f);
+		dmovementsys->process();
+		//movementsys->process();
 
 		//Sleep(160);
 		//end++;

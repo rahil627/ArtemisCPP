@@ -3,19 +3,22 @@
 
 namespace artemis {
 
-	DelayedEntitySystem::DelayedEntitySystem(){
+	DelayedEntitySystem::DelayedEntitySystem() {
 		acc = 0;
 		delay = 0;
 		running = false;
+		autoRepeat = false;
 	}
-	
+
 	bool DelayedEntitySystem::checkProcessing() {
-		if(running){
+		if(running) {
 			acc += world->getDelta();
-			if(acc >= delay){
+
+			if(acc >= delay) {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -24,9 +27,10 @@ namespace artemis {
 	}
 
 	float DelayedEntitySystem::getRemainingTime() {
-		if(running){
+		if(running) {
 			return delay - acc;
 		}
+
 		return 0;
 	}
 
@@ -34,9 +38,18 @@ namespace artemis {
 		return running;
 	}
 
+	void DelayedEntitySystem::setAutoRepeat(bool repeat) {
+		autoRepeat = repeat;
+	}
+
 	void DelayedEntitySystem::processEntities(ImmutableBag<Entity*>& bag) {
 		processEntities(bag, acc);
-		stop();
+
+		if(autoRepeat) {
+			start(delay);
+		} else {
+			stop();
+		}
 	}
 
 	void DelayedEntitySystem::start(float delay) {
