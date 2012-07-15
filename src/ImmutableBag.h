@@ -156,7 +156,7 @@ namespace artemis {
 
 				bool set(int index, E o) {
 					
-					if(index > size) grow(index*2);;
+					if(index >= size) grow(index*2);
 
 					
 					if(o == nullptr && data[index] != nullptr){
@@ -195,9 +195,11 @@ namespace artemis {
 				void grow(int newCapacity) {
 
 					E * currentData = data;
+					int c = count;
 					data = new E[newCapacity];
 					size = newCapacity;
-
+					clear();
+					count = c;
 					for(int i=0; i < count; i++) {
 						data[i] = currentData[i];
 					}

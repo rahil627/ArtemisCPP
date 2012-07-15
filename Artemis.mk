@@ -2,9 +2,9 @@
 ## Auto Generated makefile by CodeLite IDE
 ## any manual changes will be erased      
 ##
-## Debug
+## Static_library
 ProjectName            :=Artemis
-ConfigurationName      :=Debug
+ConfigurationName      :=Static_library
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "C:\Users\Sidar\Documents\Sidar\C++\ST"
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=14-7-2012
+Date                   :=15-7-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -30,7 +30,7 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=$(IntermediateDirectory)/$(ProjectName)
+OutputFile             :=$(IntermediateDirectory)/$(ProjectName).a
 Preprocessors          :=$(PreprocessorSwitch)_ARTEMIS_DEBUG 
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
@@ -38,9 +38,9 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="C:\Users\Sidar\Documents\Sidar\C++\ST\Artemis\Artemis.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
-CmpOptions             := -g -O0 -Wall -std=c++0x  $(Preprocessors)
-C_CmpOptions           := -g -O0 -Wall  $(Preprocessors)
-LinkOptions            :=  -static-libstdc++ -pg 
+CmpOptions             := -g -std=c++0x  $(Preprocessors)
+C_CmpOptions           := -g $(Preprocessors)
+LinkOptions            :=  -static-libstdc++ 
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)src 
 IncludePCH             := 
 RcIncludePath          := 
@@ -59,15 +59,17 @@ Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/sr
 ## Main Build Targets 
 ##
 .PHONY: all clean PreBuild PrePreBuild PostBuild
-all: $(OutputFile)
+all: $(IntermediateDirectory) $(OutputFile)
 
-$(OutputFile): $(IntermediateDirectory)/.d $(Objects) 
+$(OutputFile): $(Objects)
 	@$(MakeDirCommand) $(@D)
 	@echo "" > $(IntermediateDirectory)/.d
 	@echo $(Objects) > $(ObjectsFileList)
-	$(LinkerName) $(OutputSwitch)$(OutputFile) @$(ObjectsFileList) $(LibPath) $(Libs) $(LinkOptions)
+	$(ArchiveTool) $(ArchiveOutputSwitch)$(OutputFile) @$(ObjectsFileList)
+	@$(MakeDirCommand) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-static_library"
+	@echo rebuilt > "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-static_library\Artemis"
 
-$(IntermediateDirectory)/.d:
+./Debug:
 	@$(MakeDirCommand) "./Debug"
 
 PreBuild:
@@ -248,7 +250,7 @@ clean:
 	$(RM) $(IntermediateDirectory)/src_GroupManager$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_GroupManager$(PreprocessSuffix)
 	$(RM) $(OutputFile)
-	$(RM) $(OutputFile).exe
-	$(RM) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-debug\Artemis"
+	$(RM) $(OutputFile)
+	$(RM) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-static_library\Artemis"
 
 

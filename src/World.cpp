@@ -68,7 +68,7 @@ namespace artemis {
 		return entityManager->create();
 	}
 
-	Entity* World::getEntity(int entityId) {
+	Entity& World::getEntity(int entityId) {
 		return entityManager->getEntity(entityId);
 	}
 

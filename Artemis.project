@@ -13,11 +13,6 @@
       <File Name="src/BitSize.h"/>
     </VirtualDirectory>
     <File Name="main.cpp"/>
-    <VirtualDirectory Name="test">
-      <File Name="src/MovementSystem.h"/>
-      <File Name="src/MovementComponent.h"/>
-      <File Name="src/DMovementSystem.h"/>
-    </VirtualDirectory>
     <VirtualDirectory Name="component">
       <File Name="src/Component.cpp"/>
       <File Name="src/Component.h"/>
@@ -54,7 +49,7 @@
       <File Name="src/GroupManager.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
-  <Settings Type="Executable">
+  <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
         <IncludePath Value="."/>
@@ -73,6 +68,44 @@
       <Linker Options="-static-libstdc++;-pg;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="yes">
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths>C:\MinGW\lib\gcc\mingw32\4.6.2\include\c++\tr1</SearchPaths>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Dynamic Library" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-std=c++0x;" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+        <IncludePath Value="src"/>
+        <Preprocessor Value="_ARTEMIS_DEBUG"/>
+      </Compiler>
+      <Linker Options="-static-libstdc++;" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).dll" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -137,6 +170,44 @@
         <ClangCmpFlags/>
         <ClangPP/>
         <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Static library" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-std=c++0x;" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="."/>
+        <IncludePath Value="src"/>
+        <Preprocessor Value="_ARTEMIS_DEBUG"/>
+      </Compiler>
+      <Linker Options="-static-libstdc++;" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).a" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="yes">
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths>C:\MinGW\lib\gcc\mingw32\4.6.2\include\c++\tr1</SearchPaths>
       </Completion>
     </Configuration>
   </Settings>

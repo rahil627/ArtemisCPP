@@ -24,7 +24,7 @@ namespace artemis {
 			void deleteEntity(Entity *e);
 			void refreshEntity(Entity *e);
 			Entity& createEntity();
-			Entity* getEntity(int entityId);
+			Entity& getEntity(int entityId);
 			void loopStart();
 
 

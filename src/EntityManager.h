@@ -37,7 +37,7 @@ namespace artemis {
 					return getComponent(e,type);
 				}
 
-				Entity * getEntity(int entityId);
+				Entity& getEntity(int entityId);
 				int getEntityCount();
 				long getTotalCreated();
 				long getTotalRemoved();

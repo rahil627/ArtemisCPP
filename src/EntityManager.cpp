@@ -56,8 +56,8 @@ namespace artemis {
 
 		};
 
-		Entity* EntityManager::getEntity(int entityId) {
-			return activeEntities.get(entityId);
+		Entity& EntityManager::getEntity(int entityId) {
+			return *activeEntities.get(entityId);
 		};
 
 		int EntityManager::getEntityCount() {
