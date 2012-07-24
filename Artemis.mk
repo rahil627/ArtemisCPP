@@ -5,7 +5,7 @@
 ## Static_library
 ProjectName            :=Artemis
 ConfigurationName      :=Static_library
-IntermediateDirectory  :=./Debug
+IntermediateDirectory  :=./Release
 OutDir                 := $(IntermediateDirectory)
 WorkspacePath          := "C:\Users\Sidar\Documents\Sidar\C++\ST"
 ProjectPath            := "C:\Users\Sidar\Documents\Sidar\C++\ST\Artemis"
@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=15-7-2012
+Date                   :=20-7-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -30,17 +30,17 @@ PreprocessorSwitch     :=-D
 SourceSwitch           :=-c 
 CompilerName           :=g++
 C_CompilerName         :=gcc
-OutputFile             :=$(IntermediateDirectory)/$(ProjectName).a
-Preprocessors          :=$(PreprocessorSwitch)_ARTEMIS_DEBUG 
+OutputFile             :=$(IntermediateDirectory)/libartemis.a
+Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E 
 ObjectsFileList        :="C:\Users\Sidar\Documents\Sidar\C++\ST\Artemis\Artemis.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
-CmpOptions             := -g -std=c++0x  $(Preprocessors)
-C_CmpOptions           := -g $(Preprocessors)
-LinkOptions            :=  -static-libstdc++ 
+CmpOptions             := -std=c++0x  $(Preprocessors)
+C_CmpOptions           :=  $(Preprocessors)
+LinkOptions            :=  
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)src 
 IncludePCH             := 
 RcIncludePath          := 
@@ -52,8 +52,8 @@ LibPath                := $(LibraryPathSwitch).
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files (x86)\CodeLite
-Objects=$(IntermediateDirectory)/main$(ObjectSuffix) $(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentType$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentTypeManager$(ObjectSuffix) $(IntermediateDirectory)/src_EntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_Entity$(ObjectSuffix) $(IntermediateDirectory)/src_World$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemBitManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) 
+Objects=$(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentType$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentTypeManager$(ObjectSuffix) $(IntermediateDirectory)/src_EntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_Entity$(ObjectSuffix) $(IntermediateDirectory)/src_World$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntitySystem$(ObjectSuffix) $(IntermediateDirectory)/src_DelayedEntityProcessingSystem$(ObjectSuffix) $(IntermediateDirectory)/src_EntityManager$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_SystemBitManager$(ObjectSuffix) $(IntermediateDirectory)/src_SystemManager$(ObjectSuffix) $(IntermediateDirectory)/src_TagManager$(ObjectSuffix) $(IntermediateDirectory)/src_GroupManager$(ObjectSuffix) 
 
 ##
 ## Main Build Targets 
@@ -69,8 +69,13 @@ $(OutputFile): $(Objects)
 	@$(MakeDirCommand) "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-static_library"
 	@echo rebuilt > "C:\Users\Sidar\Documents\Sidar\C++\ST\.build-static_library\Artemis"
 
-./Debug:
-	@$(MakeDirCommand) "./Debug"
+PostBuild:
+	@echo Executing Post Build commands ...
+	move $(ProjectPath)\Release\libartemis.a $(ProjectPath)\bin
+	@echo Done
+
+./Release:
+	@$(MakeDirCommand) "./Release"
 
 PreBuild:
 
@@ -78,14 +83,6 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/main$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main$(DependSuffix)
-	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/main.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/main$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/main$(DependSuffix): main.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main$(ObjectSuffix) -MF$(IntermediateDirectory)/main$(DependSuffix) -MM "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/main.cpp"
-
-$(IntermediateDirectory)/main$(PreprocessSuffix): main.cpp
-	@$(CompilerName) $(CmpOptions) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main$(PreprocessSuffix) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/main.cpp"
-
 $(IntermediateDirectory)/src_Component$(ObjectSuffix): src/Component.cpp $(IntermediateDirectory)/src_Component$(DependSuffix)
 	$(CompilerName) $(IncludePCH) $(SourceSwitch) "C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src/Component.cpp" $(CmpOptions) $(ObjectSwitch)$(IntermediateDirectory)/src_Component$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/src_Component$(DependSuffix): src/Component.cpp
@@ -204,9 +201,6 @@ $(IntermediateDirectory)/src_GroupManager$(PreprocessSuffix): src/GroupManager.c
 ## Clean
 ##
 clean:
-	$(RM) $(IntermediateDirectory)/main$(ObjectSuffix)
-	$(RM) $(IntermediateDirectory)/main$(DependSuffix)
-	$(RM) $(IntermediateDirectory)/main$(PreprocessSuffix)
 	$(RM) $(IntermediateDirectory)/src_Component$(ObjectSuffix)
 	$(RM) $(IntermediateDirectory)/src_Component$(DependSuffix)
 	$(RM) $(IntermediateDirectory)/src_Component$(PreprocessSuffix)

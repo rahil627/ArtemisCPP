@@ -10,6 +10,7 @@ namespace artemis {
 		class ComponentMapper {
 
 			private:
+				
 				EntityManager * em;
 
 			public:
@@ -28,6 +29,7 @@ namespace artemis {
 				 *nullptr is returned.
 				 */
 				c * get(Entity & e) {
+					//ATTN perhaps pointing to the component bag is faster.
 					return (c*)em->getComponent<c>(e);
 				}
 

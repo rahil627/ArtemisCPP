@@ -28,19 +28,19 @@ namespace artemis {
 				};
 	
 				/**
-				 *  If set(int index, E o) is used, the bag might
+				 *  If set is used, the bag might
 				 *  contain gaps between indexes. Use this to get a 
 				 *  complete bag. No changes will be made to the original bag.
 				 */
-				Bag<E> & getGapless(){
+				Bag<E> * getGapless(){
 					
-					Bag<E> bag(this->count);
-					int c = 0;
+					Bag<E> * bag = new Bag<E>(this->count);
+					//int c = 0;
 					
 					for(int i=0; i < this->size; i++)
 					{
 						if(this->data[i] != nullptr){
-							bag.add(data[i]);
+							bag->add(data[i]);
 						}
 					}
 					
@@ -162,7 +162,7 @@ namespace artemis {
 					if(o == nullptr && data[index] != nullptr){
 						count--;
 					}
-					else if(data[index] == nullptr){
+					else if(o != nullptr && data[index] == nullptr){
 						count++;
 					};
 
@@ -175,6 +175,16 @@ namespace artemis {
 					addAll(bag);
 				};
 
+
+				void deleteData(){
+					
+					for(int i=0; i<size; i++)
+					{
+						delete data[i];
+						data[i] = nullptr;
+					}
+
+				}
 
 				~Bag<E>() {
 					delete[] data;
@@ -193,7 +203,7 @@ namespace artemis {
 				};
 
 				void grow(int newCapacity) {
-
+					//TODO Delete currentData pointer??
 					E * currentData = data;
 					int c = count;
 					data = new E[newCapacity];

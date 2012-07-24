@@ -13,6 +13,7 @@ namespace artemis {
 		this->entityManager = new EntityManager(*this);
 		this->groupManager = new GroupManager();
 		this->tagManager = new TagManager();
+		delta = 0;
 	}
 
 	void World::deleteEntity(Entity* e) {

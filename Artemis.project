@@ -2,7 +2,7 @@
 <CodeLite_Project Name="Artemis" InternalType="Console">
   <Plugins>
     <Plugin Name="qmake">
-      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+      <![CDATA[00040001N0005Debug0000000000000001N0015Dynamic Library0000000000000001N0007Release0000000000000001N0014Static library000000000000]]>
     </Plugin>
   </Plugins>
   <Description/>
@@ -12,7 +12,6 @@
       <File Name="src/ImmutableBag.h"/>
       <File Name="src/BitSize.h"/>
     </VirtualDirectory>
-    <File Name="main.cpp"/>
     <VirtualDirectory Name="component">
       <File Name="src/Component.cpp"/>
       <File Name="src/Component.h"/>
@@ -49,6 +48,10 @@
       <File Name="src/GroupManager.h"/>
     </VirtualDirectory>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Dynamic Library"/>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Static library"/>
   <Settings Type="Static Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
@@ -98,14 +101,13 @@
       </Completion>
     </Configuration>
     <Configuration Name="Dynamic Library" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Dynamic Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-std=c++0x;" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+      <Compiler Options="-std=c++0x;" C_Options="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
         <IncludePath Value="src"/>
-        <Preprocessor Value="_ARTEMIS_DEBUG"/>
       </Compiler>
-      <Linker Options="-static-libstdc++;" Required="yes"/>
+      <Linker Options="-O3;" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).dll" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/artemis.dll" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -114,7 +116,11 @@
         <StartupCommands/>
       </Debugger>
       <PreBuild/>
-      <PostBuild/>
+      <PostBuild>
+        <Command Enabled="yes">move $(ProjectPath)\Release\artemis.dll $(ProjectPath)\bin</Command>
+        <Command Enabled="yes">gendef - $(ProjectPath)\bin\artemis.dll &gt;$(ProjectPath)\bin\artemis.def</Command>
+        <Command Enabled="yes">dlltool -d $(ProjectPath)\bin\artemis.def -l $(ProjectPath)\bin\libartemis.a</Command>
+      </PostBuild>
       <CustomBuild Enabled="no">
         <RebuildCommand/>
         <CleanCommand/>
@@ -173,14 +179,13 @@
       </Completion>
     </Configuration>
     <Configuration Name="Static library" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g;-std=c++0x;" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+      <Compiler Options="-std=c++0x;" C_Options="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
         <IncludePath Value="."/>
         <IncludePath Value="src"/>
-        <Preprocessor Value="_ARTEMIS_DEBUG"/>
       </Compiler>
-      <Linker Options="-static-libstdc++;" Required="yes"/>
+      <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
-      <General OutputFile="$(IntermediateDirectory)/$(ProjectName).a" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <General OutputFile="$(IntermediateDirectory)/libartemis.a" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -189,7 +194,9 @@
         <StartupCommands/>
       </Debugger>
       <PreBuild/>
-      <PostBuild/>
+      <PostBuild>
+        <Command Enabled="yes">move $(ProjectPath)\Release\libartemis.a $(ProjectPath)\bin</Command>
+      </PostBuild>
       <CustomBuild Enabled="no">
         <RebuildCommand/>
         <CleanCommand/>
