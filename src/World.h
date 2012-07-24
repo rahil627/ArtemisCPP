@@ -21,8 +21,8 @@ namespace artemis {
 			GroupManager * getGroupManager();
 			float getDelta();
 			void setDelta(float delta);
-			void deleteEntity(Entity *e);
-			void refreshEntity(Entity *e);
+			void deleteEntity(Entity& e);
+			void refreshEntity(Entity& e);
 			Entity& createEntity();
 			Entity& getEntity(int entityId);
 			void loopStart();

@@ -15,6 +15,7 @@ namespace artemis {
 				uniqueEntityId = 0;
 				totalCreated = 0;
 				totalRemoved = 0;
+				entityComponents = new Bag<Component*>(10);
 			
 		};
 
@@ -83,7 +84,8 @@ namespace artemis {
 		};
 
 
-		Bag<Component*> * EntityManager::getComponents(Entity& e) {
+		Bag<Component*> & EntityManager::getComponents(Entity& e) {
+		
 			entityComponents->clear();
 
 			for(int i=0; i< componentsByType.getCapacity(); i++) {
@@ -97,8 +99,8 @@ namespace artemis {
 					}
 				}
 			}
-
-			return entityComponents;
+		
+			return *entityComponents;
 		};
 
 		bool EntityManager::isActive(int entityId) {

@@ -16,9 +16,9 @@ namespace artemis {
 		delta = 0;
 	}
 
-	void World::deleteEntity(Entity* e) {
-		if(!deleted.contains(e))
-			deleted.add(e);
+	void World::deleteEntity(Entity& e) {
+		if(!deleted.contains(&e))
+			deleted.add(&e);
 	}
 
 	float World::getDelta() {
@@ -56,8 +56,8 @@ namespace artemis {
 			for(int i=0; i<deleted.getCount(); i++) {
 				Entity & e = *deleted.get(i);
 				groupManager->remove(e);
-				entityManager->remove(e);
 				tagManager->remove(e);
+				entityManager->remove(e);
 			}
 
 			deleted.clear();
@@ -74,8 +74,8 @@ namespace artemis {
 	}
 
 
-	void World::refreshEntity(Entity* e) {
-		refreshed.add(e);
+	void World::refreshEntity(Entity& e) {
+		refreshed.add(&e);
 	}
 
 	void World::setDelta(float delta) {

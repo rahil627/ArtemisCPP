@@ -65,7 +65,7 @@ namespace artemis {
 				return (c*)entityManager->getComponent(*this,ComponentTypeManager::getTypeFor<c>());
 			}
 
-			ImmutableBag<Component*> * getComponents();
+			ImmutableBag<Component*> & getComponents();
 
 			bool isActive();
 			void refresh();

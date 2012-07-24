@@ -42,7 +42,7 @@ namespace artemis {
 				long getTotalCreated();
 				long getTotalRemoved();
 
-				Bag<Component*> * getComponents(Entity & e);
+				Bag<Component*>& getComponents(Entity & e);
 
 
 			private:

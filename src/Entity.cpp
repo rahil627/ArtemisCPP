@@ -31,7 +31,7 @@ namespace artemis {
 			return entityManager->getComponent(*this, type);
 		}
 
-		ImmutableBag<Component*> * Entity::getComponents() {
+		ImmutableBag<Component*> & Entity::getComponents() {
 			return entityManager->getComponents(*this);
 		}
 
@@ -56,7 +56,7 @@ namespace artemis {
 		}
 
 		void Entity::refresh() {
-			world->refreshEntity(this);
+			world->refreshEntity(*this);
 		}
 
 		void Entity::addComponent(Component * c){
@@ -78,7 +78,6 @@ namespace artemis {
 		void Entity::reset() {
 			typeBits = 0;
 			systemBits = 0;
-			
 		}
 
 		void Entity::setGroup(string group) {
@@ -109,6 +108,6 @@ namespace artemis {
 		}
 		
 		void Entity::remove() {
-			world->deleteEntity(this);
+			world->deleteEntity(*this);
 		}
 };

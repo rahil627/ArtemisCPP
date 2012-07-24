@@ -147,6 +147,7 @@ namespace artemis {
 					if(!isEmpty()) {
 						E object = data[count-1];
 						data[count-1] = nullptr;
+						--count;
 						return (E) object;
 					}
 
