@@ -15,8 +15,6 @@ namespace artemis {
 				uniqueEntityId = 0;
 				totalCreated = 0;
 				totalRemoved = 0;
-				entityComponents = new Bag<Component*>(10);
-			
 		};
 
 		void EntityManager::addComponent(Entity &e, Component * c) {
@@ -36,6 +34,8 @@ namespace artemis {
 
 			components->set(e.getId(), c);
 			e.addTypeBit(type.getBit());
+			
+			components = nullptr;
 
 		};
 
@@ -86,7 +86,7 @@ namespace artemis {
 
 		Bag<Component*> & EntityManager::getComponents(Entity& e) {
 		
-			entityComponents->clear();
+			entityComponents.clear();
 
 			for(int i=0; i< componentsByType.getCapacity(); i++) {
 				Bag<Component*> * components = componentsByType.get(i);
@@ -95,12 +95,12 @@ namespace artemis {
 					Component * c = components->get(e.getId());
 
 					if(c != nullptr) {
-						entityComponents->add(c);
+						entityComponents.add(c);
 					}
 				}
 			}
 		
-			return *entityComponents;
+			return entityComponents;
 		};
 
 		bool EntityManager::isActive(int entityId) {
@@ -109,10 +109,10 @@ namespace artemis {
 
 		void EntityManager::refresh(Entity& e) {
 			SystemManager * systemManager = world->getSystemManager();
-			Bag<EntitySystem*> * systems = systemManager->getSystems();
+			Bag<EntitySystem*> & systems = systemManager->getSystems();
 
-			for(int i=0; i< systems->getCount(); i++) {
-				systems->get(i)->change(e);
+			for(int i=0; i< systems.getCount(); i++) {
+				systems.get(i)->change(e);
 			}
 
 		};
@@ -133,6 +133,7 @@ namespace artemis {
 			delete components->get(e.getId());
 			components->set(e.getId(), nullptr);
 			e.removeTypeBit(type.getBit());
+			components = nullptr;
 		};
 
 		void EntityManager::removeComponentsOfEntity(Entity& e) {
@@ -144,7 +145,38 @@ namespace artemis {
 					delete components->get(e.getId());
 					components->set(e.getId(), nullptr);
 				}
+				
+				components = nullptr;
 			}
 
 		};
+		
+		void EntityManager::removeAllEntities(){
+			
+			for(int i=0; i<activeEntities.getCapacity(); i++)
+			{
+				if(activeEntities.get(i) != nullptr){
+					remove(*activeEntities.get(i));
+				}
+			}
+			
+		}
+		
+		EntityManager::~EntityManager(){
+			//Removes every active entity and puts it in removeAndAvailable.
+			//Also calls removeComponentsOfEntity. All systems will be updated and will remove each entity.
+			this->removeAllEntities();
+			// Destroy the data from memory; activeEntities should be empty by now.
+			this->removedAndAvailable.deleteData(); 
+			
+			for(int i=0; i<componentsByType.getCapacity(); i++) {
+				if(componentsByType.get(i) == nullptr) continue;
+				 componentsByType.get(i)->clear();
+			}
+			componentsByType.deleteData();
+			componentsByType.clear();
+			
+			//Does not own world. Only points to it.
+			this->world = nullptr;    
+		}
 };

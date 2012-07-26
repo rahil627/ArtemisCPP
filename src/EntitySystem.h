@@ -27,7 +27,7 @@ namespace artemis {
 				return systemBit;
 			}
 			void setSystemBit(std::bitset<BITSIZE> bit);
-			~EntitySystem();
+			virtual ~EntitySystem();
 			/*override these functions*/
 			virtual void initialize() {};
 			void setWorld(World *world);

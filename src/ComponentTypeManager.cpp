@@ -11,6 +11,17 @@ namespace artemis {
 
 		return *type;
 	};
+	
+	void ComponentTypeManager::deleteComponentTypes(){
+		 
+		std::unordered_map<size_t,ComponentType*>::iterator it;
+		
+		for(it = componentTypes.begin(); it != componentTypes.end(); it++)
+		{
+			delete it->second;
+		}
+		componentTypes.clear();
+	}
 
 	std::unordered_map<size_t,ComponentType*>ComponentTypeManager::componentTypes;
 }

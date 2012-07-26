@@ -14,8 +14,9 @@ namespace artemis {
 	class SystemManager {
 		public:
 			SystemManager(World &world);
+			~SystemManager();
 			void initializeAll();
-			Bag<EntitySystem*> * getSystems();
+			Bag<EntitySystem*> & getSystems();
 			EntitySystem * setSystem(EntitySystem * stm);
 
 			template<typename eSystem>
@@ -26,7 +27,7 @@ namespace artemis {
 		private:
 			World * world;
 			std::unordered_map<size_t, EntitySystem*> systems;
-			Bag<EntitySystem*> * bagged;
+			Bag<EntitySystem*> bagged;
 	};
 };
 #endif // $(Guard token)

@@ -37,15 +37,19 @@ namespace artemis {
 	void GroupManager::remove(Entity& e) {
 		if(e.getId() < groupByEntity.getCapacity()){
 			
-			std::string * group = groupByEntity.get(e.getId());
-			if(group != nullptr){
+			std::string * groupId = groupByEntity.get(e.getId());
+			if(groupId != nullptr){
 				groupByEntity.set(e.getId(), nullptr);
 				
-				Bag<Entity*> * entities = entitiesByGroup[*group];
+				Bag<Entity*> * entities = entitiesByGroup[*groupId];
 				if(entities != nullptr){
 					entities->remove(&e);
 				}
+				entities = nullptr;
+				delete groupId;
+				groupId = nullptr;
 			}
+			groupId = nullptr;
 			
 		}
 	}
@@ -59,9 +63,25 @@ namespace artemis {
 			entitiesByGroup[group] = entities;
 		}
 		entities->add(&e);
+		entities = nullptr;
 		groupByEntity.set(e.getId(), new std::string(group));
 		
 	}
+	
+	GroupManager::~GroupManager(){
+		
+		groupByEntity.deleteData();
+		
+		//groupByEntity.clear();
+		
+		std::unordered_map<std::string, Bag<Entity*>*>::iterator it;
+			
+			for(it = entitiesByGroup.begin(); it != entitiesByGroup.end(); it++)
+			{
+				delete it->second;
+			}
 
+		entitiesByGroup.clear();
+	}
 
 };

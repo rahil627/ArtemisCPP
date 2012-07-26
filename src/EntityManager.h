@@ -15,13 +15,16 @@ namespace artemis {
 
 			public:
 				EntityManager(World& world);
+				~EntityManager();
 				Entity & create();
 				void remove(Entity &e);
 				void removeComponentsOfEntity(Entity & e);
 				bool isActive(int entityId);
 				void addComponent(Entity &e, Component * c);
 				void refresh(Entity &e);
-
+				
+				void removeAllEntities();
+				
 				void removeComponent(Entity & e, ComponentType & type);
 
 				template<typename c>
@@ -56,7 +59,7 @@ namespace artemis {
 				long totalRemoved;
 
 				Bag<Bag<Component*>*> componentsByType;
-				Bag<Component*> * entityComponents;
+				Bag<Component*> entityComponents;
 
 		};
 };

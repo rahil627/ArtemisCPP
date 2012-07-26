@@ -17,6 +17,7 @@ namespace artemis {
 		std::unordered_map<std::string, Bag<Entity*>*> entitiesByGroup;
 	public:
 		GroupManager();
+		~GroupManager();
 		void set(std::string group, Entity& e);
 		void remove(Entity& e);
 		std::string getGroupOf(Entity& e);

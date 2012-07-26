@@ -27,7 +27,6 @@ namespace artemis {
 		}
 	}
 
-
 	void EntitySystem::process() {
 		if(checkProcessing()) {
 			begin();

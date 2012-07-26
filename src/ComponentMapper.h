@@ -20,6 +20,7 @@ namespace artemis {
 				}
 
 				~ComponentMapper() {
+					//Not the owner. Only a pointer to.
 					em = nullptr;
 				}
 				

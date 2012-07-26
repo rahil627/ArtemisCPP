@@ -18,7 +18,7 @@ namespace artemis {
 		public:
 
 			static std::bitset<BITSIZE> & getBitFor(const std::type_info & type);
-
+			static void removeBitSets();
 			template<typename system>
 			static std::bitset<BITSIZE> & getBitFor() {
 

@@ -3,6 +3,7 @@
 
 #include <unordered_map>
 #include <typeinfo>
+#include <assert.h>
 #include <bitset>
 #include "ComponentType.h"
 #include "Component.h"
@@ -22,7 +23,7 @@ namespace artemis {
 
 		public:
 
-
+			static void deleteComponentTypes();
 			/**
 			 *
 			 **/

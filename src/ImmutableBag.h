@@ -184,7 +184,7 @@ namespace artemis {
 						delete data[i];
 						data[i] = nullptr;
 					}
-
+					count = 0;
 				}
 
 				~Bag<E>() {

@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "SystemManager.h"
 #include "EntityManager.h"
+#include "SystemBitManager.h"
 
 
 
@@ -83,9 +84,12 @@ namespace artemis {
 	}
 
 	World::~World() {
-		delete systemManager;
+		//Entity manager should be deleted first.
 		delete entityManager;
+		delete systemManager;
 		delete groupManager;
 		delete tagManager;
+		ComponentTypeManager::deleteComponentTypes();
+		SystemBitManager::removeBitSets();
 	}
 };
