@@ -33,7 +33,7 @@ AtermisCPP is an attempt to port the Artemis framework, written in Java, to C++
 
 >Note:  
 >This project is created with CodeLite.   
->Working with GCC(mingw) 4.6.2; Enabled experimental c++0x with -std=c++0x (It requires the new standard features)  
+>Working with GCC(mingw) 4.7.0; Enabled experimental c++11 with -std=c++11 (It requires the new standard features)  
 >Documentation and whatnot will be done when every component is in place and working.
 
 ***

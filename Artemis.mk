@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=26-7-2012
+Date                   :=29-7-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -38,7 +38,7 @@ PreprocessOnlySwitch   :=-E
 ObjectsFileList        :="C:\Users\Sidar\Documents\Sidar\C++\ST\Artemis\Artemis.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=makedir
-CmpOptions             := -std=c++0x  $(Preprocessors)
+CmpOptions             := -std=c++11  $(Preprocessors)
 C_CmpOptions           :=  $(Preprocessors)
 LinkOptions            :=  -O3 
 IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). $(IncludeSwitch)src 

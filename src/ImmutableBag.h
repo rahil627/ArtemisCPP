@@ -11,6 +11,7 @@ namespace artemis {
 				virtual int getCapacity() = 0;
 				virtual int getCount() = 0;
 				virtual bool isEmpty() = 0;
+				virtual ~ImmutableBag(){};
 		};
 
 		template<typename E>
@@ -187,7 +188,7 @@ namespace artemis {
 					count = 0;
 				}
 
-				~Bag<E>() {
+				virtual ~Bag<E>() {
 					delete[] data;
 				};
 
