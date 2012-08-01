@@ -14,14 +14,14 @@ namespace artemis {
 				EntityManager * em;
 
 			public:
-
-				ComponentMapper(World * world) {
-					em = world->getEntityManager();
-				}
-
+			
 				~ComponentMapper() {
 					//Not the owner. Only a pointer to.
 					em = nullptr;
+				}
+				
+				void init(World& world){
+					em = world.getEntityManager();
 				}
 				
 				/**

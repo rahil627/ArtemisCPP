@@ -54,6 +54,7 @@
     <std_string_set Name="m_searchPaths">
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis</SetEntry>
       <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/Artemis/src</SetEntry>
+      <SetEntry>C:/Users/Sidar/Documents/Sidar/C++/ST/ArtemisTest</SetEntry>
       <SetEntry>src</SetEntry>
     </std_string_set>
     <std_string_set Name="m_frameworks"/>

@@ -2,28 +2,28 @@ AtermisCPP is an attempt to port the Artemis framework, written in Java, to C++
 >[The Artemis Java framework](http://gamadu.com/artemis/ "Title")
 
 
-![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")0/25  
-[ ]"Component"  
-[ ]"ComponentMapper"  
-[ ]"ComponentType"  
-[ ]"ComponentTypeManager"  
-[ ]"Entity"  
-[ ]"EntityProcessingSystem"  
-[ ]"EntitySystem"  
-[ ]"SystemBitManager"  
-[ ]"ImmutableBag"  
-[ ]"EntityManager"  
-[ ]"DelayedEntityProcessingSystem"  
-[ ]"DelayedEntitySystem"  
-[ ]"GroupManager"  
-[ ]"IntervalEntityProcessingSystem"  
-[ ]"IntervalEntitySystem"  
-[ ]"Manager"  
-[ ]"SystemManager"  
-[ ]"TagManager"  
-[ ]"utils"  
-[ ]"World"  
-[ ]"Bag"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")21/25  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"Component"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"ComponentMapper"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"ComponentType"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"ComponentTypeManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"Entity"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"EntityProcessingSystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"EntitySystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"SystemBitManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"ImmutableBag"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"EntityManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"DelayedEntityProcessingSystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"DelayedEntitySystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"GroupManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"IntervalEntityProcessingSystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"IntervalEntitySystem"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"Manager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"SystemManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"TagManager"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"utils"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"World"  
+![alt text](https://dl.dropbox.com/u/12043338/11check_mark.png "check")"Bag"  
 [ ]"FastMath"  
 [ ]"Timer"  
 [ ]"TrigLUT"  
@@ -73,8 +73,8 @@ Our system that allows for he positions to be updated
 	class MovementSystem : public artemis::EntityProcessingSystem
 	{
 	private:
-		artemis::ComponentMapper<MovementComponent> * velocityMapper;
-		artemis::ComponentMapper<PositionComponent> * positionMapper;
+		artemis::ComponentMapper<MovementComponent> velocityMapper;
+		artemis::ComponentMapper<PositionComponent> positionMapper;
 
 	public:
 		MovementSystem() {
@@ -82,19 +82,15 @@ Our system that allows for he positions to be updated
 		};
 
 		virtual void initialize() {
-			velocityMapper = new artemis::ComponentMapper<MovementComponent>(world);
-			positionMapper = new artemis::ComponentMapper<PositionComponent>(world);
+			velocityMapper.init(*world);
+			positionMapper.init(*world);
 		};
 
 		virtual void processEntity(artemis::Entity &e) {
-			positionMapper->get(e)->posX += velocityMapper->get(e)->velocityX * world->getDelta();
-			positionMapper->get(e)->posY += velocityMapper->get(e)->velocityY * world->getDelta();
+			positionMapper.get(e)->posX += velocityMapper.get(e)->velocityX * world->getDelta();
+			positionMapper.get(e)->posY += velocityMapper.get(e)->velocityY * world->getDelta();
 		};
 
-		~MovementSystem() {
-			delete velocityMapper;
-			delete positionMapper;
-		};
 	};
 
 Our test run  

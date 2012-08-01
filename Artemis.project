@@ -52,7 +52,7 @@
   <Dependencies Name="Dynamic Library"/>
   <Dependencies Name="Release"/>
   <Dependencies Name="Static library"/>
-  <Settings Type="Static Library">
+  <Settings Type="Dynamic Library">
     <GlobalSettings>
       <Compiler Options="" C_Options="">
         <IncludePath Value="."/>
@@ -118,8 +118,8 @@
       <PreBuild/>
       <PostBuild>
         <Command Enabled="yes">move $(ProjectPath)\Release\artemis.dll $(ProjectPath)\bin</Command>
-        <Command Enabled="yes">gendef - $(ProjectPath)\bin\artemis.dll &gt;$(ProjectPath)\bin\artemis.def</Command>
-        <Command Enabled="yes">dlltool -d $(ProjectPath)\bin\artemis.def -l $(ProjectPath)\bin\libartemis.a</Command>
+        <Command Enabled="yes">gendef - $(ProjectPath)\bin\artemis.dll &gt; $(ProjectPath)\bin\artemisdll.def</Command>
+        <Command Enabled="yes">dlltool -d $(ProjectPath)\bin\artemisdll.def -l $(ProjectPath)\bin\libartemis.a</Command>
       </PostBuild>
       <CustomBuild Enabled="no">
         <RebuildCommand/>

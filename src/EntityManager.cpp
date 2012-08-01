@@ -83,8 +83,10 @@ namespace artemis {
 			return nullptr;
 		};
 
-
-		Bag<Component*> & EntityManager::getComponents(Entity& e) {
+		/**
+		 * Retrieves all components for one entity.
+		 */
+		Bag<Component*>& EntityManager::getComponents(Entity& e) {
 		
 			entityComponents.clear();
 

@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Sidar
-Date                   :=29-7-2012
+Date                   :=1-8-2012
 CodeLitePath           :="C:\Program Files (x86)\CodeLite"
 LinkerName             :=g++
 ArchiveTool            :=ar rcus
@@ -72,8 +72,8 @@ $(OutputFile): $(IntermediateDirectory)/.d $(Objects)
 PostBuild:
 	@echo Executing Post Build commands ...
 	move $(ProjectPath)\Release\artemis.dll $(ProjectPath)\bin
-	gendef - $(ProjectPath)\bin\artemis.dll >$(ProjectPath)\bin\artemis.def
-	dlltool -d $(ProjectPath)\bin\artemis.def -l $(ProjectPath)\bin\libartemis.a
+	gendef - $(ProjectPath)\bin\artemis.dll > $(ProjectPath)\bin\artemisdll.def
+	dlltool -d $(ProjectPath)\bin\artemisdll.def -l $(ProjectPath)\bin\libartemis.a
 	@echo Done
 
 $(IntermediateDirectory)/.d:
