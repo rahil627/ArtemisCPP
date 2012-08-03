@@ -26,6 +26,10 @@ namespace artemis {
 			std::bitset<BITSIZE> systemBits;
 			World * world;
 			EntityManager * entityManager;
+			
+			Entity(const Entity&) = delete;
+			Entity& operator=(const Entity&) = delete;
+			
 		protected:
 
 		public:
