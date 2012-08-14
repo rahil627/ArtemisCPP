@@ -1,6 +1,7 @@
 #include "Entity.h"
 #include <sstream>
 #include "Component.h"
+#include "World.h"
 //#include "EntityManager.h"
 
 using namespace std;

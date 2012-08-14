@@ -20,18 +20,40 @@ namespace artemis {
 
 		}
 
-		EntitySystem* SystemManager::setSystem(EntitySystem* stm) {
-			stm->setWorld(world);
+		EntitySystem& SystemManager::setSystem(EntitySystem* stm) {
 			
-			if(!bagged.contains(stm)){
-				
-				systems[typeid(*stm).hash_code()]  = stm;
-				bagged.add(stm);
+			bool bitFlag = false;
+			int index = 0;
+			
+			//Check if system is known.
+			for(int i=0; i< bagged.getCount(); i++)
+			{
+				if(typeid(*stm) == typeid(*bagged.get(i))){
+					bitFlag = true;
+					index = i;
+				}
 			}
 			
-			stm->setSystemBit(SystemBitManager::getBitFor(typeid(*stm)));
+			//Check if stm pointer doesn't point to an existing system
+			//Else add system to manager
+			if(bagged.get(index) != stm){
+				//If it doesn't point to an existing system
+				//Check if the new system is already known
+				if(bitFlag){
+					//Delete newly made system.
+					delete stm; 
+					//Point to existing system in bag.
+					stm = bagged.get(index);
+				}
+				else{
+					stm->setWorld(world);
+					systems[typeid(*stm).hash_code()]  = stm;
+					bagged.add(stm);
+					stm->setSystemBit(SystemBitManager::getBitFor(typeid(*stm)));					
+				}
+			}
 			
-			return stm;
+			return *stm;
 		}
 		
 		SystemManager::~SystemManager(){
