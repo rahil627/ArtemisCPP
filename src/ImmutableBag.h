@@ -61,7 +61,6 @@ namespace artemis {
 				 **/
 				void add(E o) {
 					if(size == count)grow();
-
 					data[count++] = o;
 				};
 
@@ -212,7 +211,7 @@ namespace artemis {
 					size = newCapacity;
 					clear();
 					count = c;
-					for(int i=0; i < count; i++) {
+					for(int i=0; i < size; i++) {
 						data[i] = currentData[i];
 					}
 				};

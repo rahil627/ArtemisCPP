@@ -60,12 +60,14 @@ namespace artemis {
 			world->refreshEntity(*this);
 		}
 
-		void Entity::addComponent(Component * c){
+		Entity& Entity::addComponent(Component * c){
 			entityManager->addComponent(*this,c);
+			return *this;
 		}
 		
-		void Entity::removeComponent(ComponentType & type) {
+		Entity& Entity::removeComponent(ComponentType & type) {
 			entityManager->removeComponent(*this, type);
+			return *this;
 		}
 
 		void Entity::removeSystemBit(bitset<BITSIZE> bit) {

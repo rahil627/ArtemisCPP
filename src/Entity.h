@@ -51,15 +51,16 @@ namespace artemis {
 
 			std::string toString();
 
-			void addComponent(Component * c);
+			Entity& addComponent(Component * c);
 
 			//Might change to non template
 			template<typename c>
-			void removeComponent() {
+			Entity& removeComponent() {
 				entityManager->removeComponent(*this,ComponentTypeManager::getTypeFor<c>());
+				return *this;
 			}
 
-			void removeComponent(ComponentType & type);
+			Entity& removeComponent(ComponentType & type);
 
 
 			Component * getComponent(ComponentType & type);
