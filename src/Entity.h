@@ -66,7 +66,7 @@ namespace artemis {
 			Component * getComponent(ComponentType & type);
 
 			template<typename c>
-			Component * getComponent() {
+			c * getComponent() {
 				return (c*)entityManager->getComponent(*this,ComponentTypeManager::getTypeFor<c>());
 			}
 
