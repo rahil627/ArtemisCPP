@@ -204,16 +204,16 @@ namespace artemis {
 				};
 
 				void grow(int newCapacity) {
+					//TODO Delete currentData pointer??
 					E * currentData = data;
 					int c = count;
 					data = new E[newCapacity];
 					size = newCapacity;
 					clear();
 					count = c;
-					for(int i=0; i < c; i++) {
+					for(int i=0; i < size; i++) {
 						data[i] = currentData[i];
 					}
-					delete[] currentData;
 				};
 
 				void init(int capacity) {
